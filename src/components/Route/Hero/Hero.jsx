@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../../../styles/styles";
-import Banner from "../../../Assests/summersale.jpg"
+import Banner from "../../../Assests/unimakbann.png"
 
 const Hero = () => {
   return (
@@ -13,24 +13,23 @@ const Hero = () => {
       }}
     >
       <div className={`${styles.section} w-[90%] 800px:w-[60%] `}>
-        {/* <h1
+        <h1
           className={`text-[35px] leading-[1.2] 800px:text-[60px] text-[#3d3a3a] font-[600] capitalize`}
         >
-          Best Collection for <br /> home Decoration
+          Your One-Stop Shop for <br /> Construction Needs
         </h1>
         <p className="pt-5 text-[16px] font-[Poppins] font-[400] text-[#000000ba]">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae,
-          assumenda? Quisquam itaque <br /> exercitationem labore vel, dolore
-          quidem asperiores, laudantium temporibus soluta optio consequatur{" "}
-          <br /> aliquam deserunt officia. Dolorum saepe nulla provident.
-        </p> */}
-        {/* <Link to="/products" className="inline-block">
+        At our construction store, we strive to empower builders and enthusiasts alike, by offering an extensive range of top-quality tools,
+         <br /> reliable materials, and a wealth of industry expertise, all aimed at unlocking the full potential of your{" "}
+          <br /> construction projects and helping you achieve remarkable results that stand the test of time
+        </p>
+        <Link to="/products" className="inline-block">
           <div className={`${styles.button} mt-5 `}>
             <span className="text-[#fff] font-[Poppins] text-[18px]">
               Shop Now
             </span>
           </div>
-        </Link> */}
+        </Link>
       </div>
     </div>
   );
