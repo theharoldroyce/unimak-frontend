@@ -148,7 +148,8 @@ const OrderDetails = () => {
         >
           {[
             "Processing",
-            "Transferred to delivery partner",
+            // "Transferred to delivery partner",
+            "Packed",
             "Shipping",
             "Received",
             "On the way",
@@ -157,7 +158,8 @@ const OrderDetails = () => {
             .slice(
               [
                 "Processing",
-                "Transferred to delivery partner",
+                // "Transferred to delivery partner",
+                "Packed",
                 "Shipping",
                 "Received",
                 "On the way",

@@ -464,7 +464,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {todayOrder} </h5>
         </div>
-        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -478,7 +478,7 @@ const DashboardHero = () => {
             </h4>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {todayTransferred} </h5>
-        </div>
+        </div> */}
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -527,7 +527,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {yesterdayOrder} </h5>
         </div>
-        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -541,7 +541,7 @@ const DashboardHero = () => {
             </h5>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {yesterdayTransferred} </h5>
-        </div>
+        </div> */}
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -592,7 +592,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {weekOrder}</h5>
         </div>
-        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -606,7 +606,7 @@ const DashboardHero = () => {
             </h5>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {weekTransferred} </h5>
-        </div>
+        </div> */}
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -655,7 +655,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {lastWeekOrder} </h5>
         </div>
-        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -669,7 +669,7 @@ const DashboardHero = () => {
             </h5>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {lastWeekTransferred} </h5>
-        </div>
+        </div> */}
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -720,7 +720,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {monthOrder} </h5>
         </div>
-        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -734,7 +734,7 @@ const DashboardHero = () => {
             </h5>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {monthTransferred} </h5>
-        </div>
+        </div> */}
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -783,7 +783,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {lMonthOrder} </h5>
         </div>
-        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -797,7 +797,7 @@ const DashboardHero = () => {
             </h5>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {lMonthTransferred} </h5>
-        </div>
+        </div> */}
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
