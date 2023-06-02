@@ -369,7 +369,7 @@ const DashboardHero = () => {
               Today's Earning{" "}
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {todaySales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {todaySales}</h5>
           <br />
           <div className="flex items-center">
             <FcSalesPerformance
@@ -398,7 +398,7 @@ const DashboardHero = () => {
               Current Week Earning{" "}
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {weekSales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {weekSales}</h5>
           <br />
           <div className="flex items-center">
             <FcSalesPerformance
@@ -412,7 +412,7 @@ const DashboardHero = () => {
               Previous Week Earning{" "}
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {lastWeektSales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {lastWeektSales}</h5>
         </div>
         <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
@@ -428,7 +428,7 @@ const DashboardHero = () => {
               Earning{" "}
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {monthSales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {monthSales}</h5>
           <br />
           <div className="flex items-center">
             <FcSalesPerformance
