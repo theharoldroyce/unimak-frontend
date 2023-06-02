@@ -332,7 +332,7 @@ const CartData = ({
       <br/>
       <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">Discounted subtotal:</h3>
-        <h5 className="text-[18px] font-[600]">₱ {discountPercentenge}.00</h5>
+        <h5 className="text-[18px] font-[600]">₱ {discountPrice}</h5>
       </div>
 
       <br />
