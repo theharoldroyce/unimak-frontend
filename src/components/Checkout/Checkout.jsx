@@ -99,6 +99,9 @@ const Checkout = () => {
   const totalPrice = couponCodeData
     ? (discountPercentenge + 300).toFixed(2)
     : (subTotalPrice + 300).toFixed(2);
+  const totalDiscountedPrice = couponCodeData
+  ? (discountPercentenge).toFixed(2)
+    : (subTotalPrice + 300).toFixed(2);
 
   console.log(discountPercentenge);
 
@@ -332,7 +335,7 @@ const CartData = ({
       <br/>
       <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">Discounted subtotal:</h3>
-        <h5 className="text-[18px] font-[600]">₱ {discountPrice}</h5>
+        <h5 className="text-[18px] font-[600]">₱ {totalDiscountedPrice}</h5>
       </div>
 
       <br />
