@@ -97,7 +97,7 @@ const Checkout = () => {
   const discountPercentenge = couponCodeData ? discountPrice : "";
 
   const totalPrice = couponCodeData
-    ? (subtotalPrice - discountPercentenge).toFixed(2)
+    ? (subTotalPrice - discountPercentenge).toFixed(2)
     : (subTotalPrice + 300).toFixed(2);
  
 
