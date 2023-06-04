@@ -27,31 +27,31 @@ const Checkout = () => {
   }, []);
 
   const paymentSubmit = () => {
-   if(address1 === "" || address2 === "" || zipCode === null || country === "" || city === ""){
+    if (address1 === "" || address2 === "" || zipCode === null || country === "" || city === "") {
       toast.error("Please choose your delivery address!")
-   } else{
-    const shippingAddress = {
-      address1,
-      address2,
-      zipCode,
-      country,
-      city,
-    };
+    } else {
+      const shippingAddress = {
+        address1,
+        address2,
+        zipCode,
+        country,
+        city,
+      };
 
-    const orderData = {
-      cart,
-      totalPrice,
-      subTotalPrice,
-      shipping,
-      discountPrice,
-      shippingAddress,
-      user,
+      const orderData = {
+        cart,
+        totalPrice,
+        subTotalPrice,
+        shipping,
+        discountPrice,
+        shippingAddress,
+        user,
+      }
+
+      // update local storage with the updated orders array
+      localStorage.setItem("latestOrder", JSON.stringify(orderData));
+      navigate("/payment");
     }
-
-    // update local storage with the updated orders array
-    localStorage.setItem("latestOrder", JSON.stringify(orderData));
-    navigate("/payment");
-   }
   };
 
   const subTotalPrice = cart.reduce(
@@ -96,10 +96,11 @@ const Checkout = () => {
 
   const discountPercentenge = couponCodeData ? discountPrice : "";
 
+
   const totalPrice = couponCodeData
     ? (subTotalPrice - discountPercentenge + 300).toFixed(2)
     : (subTotalPrice + 300).toFixed(2);
- 
+
 
 
   console.log(discountPercentenge);
@@ -217,7 +218,7 @@ const ShippingInfo = ({
               className="w-[95%] border h-[40px] rounded-[5px]"
               value={country}
               disabled
-              // onChange={(e) => setCountry(e.target.value)}
+            // onChange={(e) => setCountry(e.target.value)}
             >
               <option className="block pb-2" value="">
                 country
@@ -236,10 +237,10 @@ const ShippingInfo = ({
               className="w-[95%] border h-[40px] rounded-[5px]"
               value={city}
               disabled
-              // onChange={(e) => setCity(e.target.value)}
+            // onChange={(e) => setCity(e.target.value)}
             >
               <option className="block pb-2" value="">
-              province
+                province
               </option>
               {State &&
                 State.getStatesOfCountry(country).map((item) => (
@@ -331,25 +332,24 @@ const CartData = ({
         <h3 className="text-[16px] font-[400] text-[#000000a4]">subtotal:</h3>
         <h5 className="text-[18px] font-[600]">₱ {subTotalPrice}</h5>
       </div>
-      <br/>
-      <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">Discounted subtotal:</h3>
-        <h5 className="text-[18px] font-[600]">₱ {totalDiscountedPrice}</h5>
-      </div>
-
       <br />
       <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">shipping:</h3>
         <h5 className="text-[18px] font-[600]">₱ 300</h5>
       </div>
       <br />
-      <div className="flex justify-between border-b pb-3">
+      <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">Discount:</h3>
-        <h5 className="text-[18px] font-[600]">
+        <h5 className="text-[18px] font-[600] text-rose-700">
           - {discountPercentenge ? "₱" + discountPercentenge.toString() : null}
         </h5>
       </div>
-      <h5 className="text-[18px] font-[600] text-end pt-3">₱ {totalPrice}</h5>
+      <br />
+      <div className="flex justify-between border-t pt-3">
+        <h3 className="text-[16px] font-[400] text-[#000000a4]">Total:</h3>
+        <h5 className="text-[18px] font-[600]">₱ {totalPrice}</h5>
+      </div>
+
       <br />
       <form onSubmit={handleSubmit}>
         <input
