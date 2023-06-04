@@ -279,7 +279,7 @@ const DashboardHero = () => {
     row.push({
       id: item._id,
       itemsQty: item.cart.reduce((acc, item) => acc + item.qty, 0),
-      total: "₱ " + item.totalPrice + ".00",
+      total: "₱ " + item.totalPrice ,
       status: item.status,
     });
   });
@@ -301,7 +301,7 @@ const DashboardHero = () => {
               Total Earning's{" "}
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500] ">₱ {totalYearSales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500] ">₱ {totalYearSales}</h5>
           <br/>
           <div className="flex items-center">
             <FcExternal
@@ -464,7 +464,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {todayOrder} </h5>
         </div>
-        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -474,11 +474,11 @@ const DashboardHero = () => {
             <h4
               className={`${styles.productTitle} !text-[15px] leading-5 !font-[400] text-[#00000085]`}
             >
-              Today's Shipped Out{" "}
+              Today's In-Transit{" "}
             </h4>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {todayTransferred} </h5>
-        </div> */}
+        </div>
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -507,7 +507,7 @@ const DashboardHero = () => {
               Today's Earning's{" "}
             </h4>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {todaySales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {todaySales}</h5>
         </div>
       </div>
       <h3 className="text-[22px] font-Poppins pb-2">Previous Day Overview</h3>
@@ -527,7 +527,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {yesterdayOrder} </h5>
         </div>
-        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -537,11 +537,11 @@ const DashboardHero = () => {
             <h5
               className={`${styles.productTitle} !text-[15px] leading-5 !font-[400] text-[#00000085]`}
             >
-              Previous Day Shipped Out{" "}
+              Previous Day In-Transit{" "}
             </h5>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {yesterdayTransferred} </h5>
-        </div> */}
+        </div>
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -570,7 +570,7 @@ const DashboardHero = () => {
               Previous Day Earning's{" "}
             </h4>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {yesterdaySales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {yesterdaySales}</h5>
         </div>
       </div>
       <br />
@@ -592,7 +592,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {weekOrder}</h5>
         </div>
-        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -606,7 +606,7 @@ const DashboardHero = () => {
             </h5>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {weekTransferred} </h5>
-        </div> */}
+        </div>
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -635,7 +635,7 @@ const DashboardHero = () => {
               Current Week Earning{" "}
             </h4>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {weekSales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {weekSales}</h5>
         </div>
       </div>
       <h3 className="text-[22px] font-Poppins pb-2">Previous Week Overview</h3>
@@ -655,7 +655,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {lastWeekOrder} </h5>
         </div>
-        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -665,11 +665,11 @@ const DashboardHero = () => {
             <h5
               className={`${styles.productTitle} !text-[15px] leading-5 !font-[400] text-[#00000085]`}
             >
-              Previous Week Shipped Out{" "}
+              Previous Week In-Transit{" "}
             </h5>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {lastWeekTransferred} </h5>
-        </div> */}
+        </div>
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -698,7 +698,7 @@ const DashboardHero = () => {
               Previous Week Earning{" "}
             </h4>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {lastWeektSales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {lastWeektSales}</h5>
         </div>
       </div>
       <br />
@@ -720,7 +720,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {monthOrder} </h5>
         </div>
-        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -730,11 +730,11 @@ const DashboardHero = () => {
             <h5
               className={`${styles.productTitle} !text-[15px] leading-5 !font-[400] text-[#00000085]`}
             >
-              Current Month Shipped Out{" "}
+              Current Month In-Transit{" "}
             </h5>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {monthTransferred} </h5>
-        </div> */}
+        </div>
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -763,7 +763,7 @@ const DashboardHero = () => {
               Current Month Earning{" "}
             </h4>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {monthSales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {monthSales}</h5>
         </div>
       </div>
       <h3 className="text-[22px] font-Poppins pb-2">Previous Month Overview</h3>
@@ -783,7 +783,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {lMonthOrder} </h5>
         </div>
-        {/* <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
+        <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcInTransit
               size={20}
@@ -793,11 +793,11 @@ const DashboardHero = () => {
             <h5
               className={`${styles.productTitle} !text-[15px] leading-5 !font-[400] text-[#00000085]`}
             >
-              Previous Month Shipped Out{" "}
+              Previous Month In-Transit{" "}
             </h5>
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500]"> {lMonthTransferred} </h5>
-        </div> */}
+        </div>
         <div className="w-full mb-4 800px:w-[25%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
           <div className="flex items-center">
             <FcShipped
@@ -826,7 +826,7 @@ const DashboardHero = () => {
               Previous Month Earning{" "}
             </h4>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {lMonthSales}.00</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {lMonthSales}</h5>
         </div>
       </div>
       <br />
@@ -848,7 +848,7 @@ const DashboardHero = () => {
                 Total Current Year Earning{" "}
               </h3>
             </div>
-            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {yearSales}.00</h5>
+            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {yearSales}</h5>
 
           </div>
           <div className="w-full mb-4 800px:w-[30%] min-h-[15vh] bg-white shadow rounded px-2 py-5">
@@ -864,7 +864,7 @@ const DashboardHero = () => {
                 Total Previous Year Earning{" "}
               </h3>
             </div>
-            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {lastYearSales}.00</h5>
+            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">₱ {lastYearSales}</h5>
           </div>
         </div>
       </div>

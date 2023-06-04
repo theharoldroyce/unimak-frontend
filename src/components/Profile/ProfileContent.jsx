@@ -351,7 +351,7 @@ const AllRefundOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: "₱ " + item.totalPrice + ".00",
+        total: "₱ " + item.totalPrice,
         status: item.status,
       });
     });
