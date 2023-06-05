@@ -65,8 +65,8 @@ const ProfileContent = ({ active }) => {
         withCredentials: true,
       })
       .then((response) => {
-         dispatch(loadUser());
-         toast.success("avatar updated successfully!");
+        dispatch(loadUser());
+        toast.success("avatar updated successfully!");
       })
       .catch((error) => {
         toast.error(error);
@@ -347,7 +347,7 @@ const AllRefundOrders = () => {
   const row = [];
 
   eligibleOrders &&
-   eligibleOrders.forEach((item) => {
+    eligibleOrders.forEach((item) => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
@@ -533,11 +533,12 @@ const ChangePassword = () => {
 
 const Address = () => {
   const [open, setOpen] = useState(false);
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("Philippines");
+  const [city, setCity] = useState("Oriental Mindoro");
   const [zipCode, setZipCode] = useState(5200);
-  const [address1, setAddress1] = useState("");
+  const [address1, setAddress1] = useState("Calapan City");
   const [address2, setAddress2] = useState("");
+  const [address3, setAddress3] = useState("");
   const [addressType, setAddressType] = useState("");
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -554,6 +555,195 @@ const Address = () => {
     },
   ];
 
+  const barangayData = [
+    {
+      name: "Balingayan",
+    },
+    {
+      name: "Balite",
+    },
+    {
+      name: "Baruyan",
+    },
+    {
+      name: "Batino",
+    },
+    {
+      name: "Bayanan I",
+    },
+    {
+      name: "Bayanan II",
+    },
+    {
+      name: "Biga",
+    },
+    {
+      name: "Bondoc",
+    },
+    {
+      name: "Bucayao",
+    },
+    {
+      name: "Buhuan",
+    },
+    {
+      name: "Bulusan",
+    },
+    {
+      name: "Sta. Rita",
+    },
+    {
+      name: "Calero",
+    },
+    {
+      name: "Camansihan",
+    },
+    {
+      name: "Camilmil",
+    },
+    {
+      name: "Canubing I",
+    },
+    {
+      name: "Canubing II",
+    },
+    {
+      name: "Comunal",
+    },
+    {
+      name: "Guinobatan",
+    },
+    {
+      name: "Gulod",
+    },
+    {
+      name: "Gutad",
+    },
+    {
+      name: "Ibaba East",
+    },
+    {
+      name: "Ibaba West",
+    },
+    {
+      name: "Ilaya",
+    },
+    {
+      name: "Lalud",
+    },
+    {
+      name: "Lazareto",
+    },
+    {
+      name: "Libis",
+    },
+    {
+      name: "Lumangbayan",
+    },
+    {
+      name: "Mahal Na Pangalan",
+    },
+    {
+      name: "Maidlang",
+    },
+    {
+      name: "Malad",
+    },
+    {
+      name: "Malamig",
+    },
+    {
+      name: "Managpi",
+    },
+    {
+      name: "Masipit",
+    },
+    {
+      name: "Nag-Iba I",
+    },
+    {
+      name: "Nag-Iba II",
+    },
+    {
+      name: "Navotas",
+    },
+    {
+      name: "Pachoca",
+    },
+    {
+      name: "Palhi",
+    },
+    {
+      name: "Panggalaan",
+    },
+    {
+      name: "Parang",
+    },
+    {
+      name: "Patas",
+    },
+    {
+      name: "Personas",
+    },
+    {
+      name: "Puting Tubig",
+    },
+    {
+      name: "San Raphael (formerly Salong)",
+    },
+    {
+      name: "San Antonio",
+    },
+    {
+      name: "San Vicente Central",
+    },
+    {
+      name: "San Vicente East",
+    },
+    {
+      name: "San Vicente North",
+    },
+    {
+      name: "San Vicente South",
+    },
+    {
+      name: "San Vicente West",
+    },
+    {
+      name: "Sta. Cruz",
+    },
+    {
+      name: "Sta. Isabel",
+    },
+    {
+      name: "Sto. Niño (formerly Nacoco)",
+    },
+    {
+      name: "Sapul",
+    },
+    {
+      name: "Silonay",
+    },
+    {
+      name: "Sta. Maria Village",
+    },
+    {
+      name: "Suqui",
+    },
+    {
+      name: "Tawagan",
+    },
+    {
+      name: "Tawiran",
+    },
+    {
+      name: "Tibag",
+    },
+    {
+      name: "Wawa",
+    },
+  ]
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -566,6 +756,7 @@ const Address = () => {
           city,
           address1,
           address2,
+          address3,
           zipCode,
           addressType
         )
@@ -575,6 +766,7 @@ const Address = () => {
       setCity("");
       setAddress1("");
       setAddress2("");
+      setAddress3("");
       setZipCode(null);
       setAddressType("");
     }
@@ -603,78 +795,77 @@ const Address = () => {
             <div className="w-full">
               <form aria-required onSubmit={handleSubmit} className="w-full">
                 <div className="w-full block p-4">
-                  <div className="w-full pb-2">
+                  <div className="w-full pb-2 hidden">
                     <label className="block pb-2">Country</label>
-                    <select
-                      name=""
-                      id=""
+                    <input
+                      type="text"
+                      className={`${styles.input} !w-[95%] mb-1 800px:mb-0`}
+                      required
                       value={country}
                       onChange={(e) => setCountry(e.target.value)}
-                      className="w-[95%] border h-[40px] rounded-[5px]"
-                    >
-                      <option value="" className="block border pb-2">
-                        choose your country
-                      </option>
-                      {Country &&
-                        Country.getAllCountries().map((item) => (
-                          <option
-                            className="block pb-2"
-                            key={item.isoCode}
-                            value={item.isoCode}
-                          >
-                            {item.name}
-                          </option>
-                        ))}
-                    </select>
+                    />
                   </div>
 
-                  <div className="w-full pb-2">
+                  <div className="w-full pb-2 hidden">
                     <label className="block pb-2">Choose your Province</label>
-                    <select
-                      name=""
-                      id=""
+                    <input
+                      type="text"
+                      className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+                      required
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
-                      className="w-[95%] border h-[40px] rounded-[5px]"
-                    >
-                      <option value="" className="block border pb-2">
-                        choose your province
-                      </option>
-                      {State &&
-                        State.getStatesOfCountry(country).map((item) => (
-                          <option
-                            className="block pb-2"
-                            key={item.isoCode}
-                            value={item.isoCode}
-                          >
-                            {item.name}
-                          </option>
-                        ))}
-                    </select>
+                    />
                   </div>
 
                   <div className="w-full pb-2">
                     <label className="block pb-2">City / Municipality</label>
                     <input
                       type="address"
-                      className={`${styles.input}`}
+                      className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
                       required
+                      disabled
                       value={address1}
                       onChange={(e) => setAddress1(e.target.value)}
                     />
                   </div>
+
                   <div className="w-full pb-2">
-                    <label className="block pb-2">House # / Street / Barangay</label>
+                    <label className="block pb-2">Select Barangay</label>
+                    <select
+                      name=""
+                      id=""
+                      value={address2}
+                      onChange={(e) => setAddress2(e.target.value)}
+                      className="w-[95%] border h-[40px] rounded-[5px]"
+                    >
+                      <option value="" className="block border pb-2">
+                        Select Barangay
+                      </option>
+                      {barangayData &&
+                        barangayData.map((item) => (
+                          <option
+                            className="block pb-2"
+                            key={item.name}
+                            value={item.name}
+                          >
+                            {item.name}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+
+                  <div className="w-full pb-2">
+                    <label className="block pb-2">House # / Street </label>
                     <input
                       type="address"
                       className={`${styles.input}`}
                       required
-                      value={address2}
-                      onChange={(e) => setAddress2(e.target.value)}
+                      value={address3}
+                      onChange={(e) => setAddress3(e.target.value)}
                     />
                   </div>
 
-                  <div className="w-full pb-2">
+                  <div className="w-full pb-2 hidden">
                     <label className="block pb-2">Zip Code</label>
                     <input
                       type="number"
@@ -682,7 +873,7 @@ const Address = () => {
                       required
                       disabled
                       value={zipCode}
-                      // onChange={(e) => setZipCode(e.target.value)}
+                    // onChange={(e) => setZipCode(e.target.value)}
                     />
                   </div>
 
@@ -748,7 +939,7 @@ const Address = () => {
             </div>
             <div className="pl-8 flex items-center">
               <h6 className="text-[12px] 800px:text-[unset]">
-                {item.address1} {item.address2}
+                {item.address1} {item.address2} {item.address3}
               </h6>
             </div>
             <div className="pl-8 flex items-center">

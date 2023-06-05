@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 const Singup = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
@@ -27,6 +28,7 @@ const Singup = () => {
 
     newForm.append("file", avatar);
     newForm.append("name", name);
+    newForm.append("phoneNumber", phoneNumber);
     newForm.append("email", email);
     newForm.append("password", password);
 
@@ -36,6 +38,7 @@ const Singup = () => {
         toast.success(res.data.message);
         setName("");
         setEmail("");
+        setPhoneNumber("");
         setPassword("");
         setAvatar();
       })
@@ -89,6 +92,26 @@ const Singup = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="phoneNumber"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Contact Number
+              </label>
+              <div className="mt-1">
+                <input
+                  type="number"
+                  name="phoneNumber"
+                  autoComplete="phoneNumber"
+                  required
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
