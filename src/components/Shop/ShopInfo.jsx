@@ -28,10 +28,19 @@ const ShopInfo = ({ isOwner }) => {
   
 
   const logoutHandler = async () => {
-    axios.get(`${server}/shop/logout`,{
-      withCredentials: true,
-    });
-    window.location.reload();
+    axios.get(`${server}/shop/logout`, { withCredentials: true })
+      .then((res) => {
+        toast.success(res.data.message);
+        window.location.reload(true);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+    // axios.get(`${server}/shop/logout`,{
+    //   withCredentials: true,
+    // });
+    // window.location.reload(true);
   };
 
   const totalReviewsLength =
