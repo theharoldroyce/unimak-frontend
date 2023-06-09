@@ -10,6 +10,10 @@ import {
   BestSellingPage,
   EventsPage,
   FAQPage,
+  PolicyPage,
+  AboutUsPage,
+  TermsPage,
+  ContactUsPage,
   CheckoutPage,
   PaymentPage,
   OrderSuccessPage,
@@ -97,6 +101,10 @@ const App = () => {
           <Route path="/best-selling" element={<BestSellingPage />} />
           <Route path="/events" element={<EventsPage />} />
           <Route path="/faq" element={<FAQPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/policy" element={<PolicyPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
+          <Route path="/contact" element={<ContactUsPage />} />
           <Route
             path="/checkout"
             element={

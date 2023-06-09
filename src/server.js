@@ -4,5 +4,4 @@
 
 
 export const server = "https://unimak-backendserver.adaptable.app/api/v2";
-
 export const backend_url = "https://unimak-backendserver.adaptable.app/";

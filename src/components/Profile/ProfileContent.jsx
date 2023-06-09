@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {barangayData} from "../../static/data"
 import {
   AiOutlineArrowRight,
   AiOutlineCamera,
@@ -555,194 +556,7 @@ const Address = () => {
     },
   ];
 
-  const barangayData = [
-    {
-      name: "Balingayan",
-    },
-    {
-      name: "Balite",
-    },
-    {
-      name: "Baruyan",
-    },
-    {
-      name: "Batino",
-    },
-    {
-      name: "Bayanan I",
-    },
-    {
-      name: "Bayanan II",
-    },
-    {
-      name: "Biga",
-    },
-    {
-      name: "Bondoc",
-    },
-    {
-      name: "Bucayao",
-    },
-    {
-      name: "Buhuan",
-    },
-    {
-      name: "Bulusan",
-    },
-    {
-      name: "Sta. Rita",
-    },
-    {
-      name: "Calero",
-    },
-    {
-      name: "Camansihan",
-    },
-    {
-      name: "Camilmil",
-    },
-    {
-      name: "Canubing I",
-    },
-    {
-      name: "Canubing II",
-    },
-    {
-      name: "Comunal",
-    },
-    {
-      name: "Guinobatan",
-    },
-    {
-      name: "Gulod",
-    },
-    {
-      name: "Gutad",
-    },
-    {
-      name: "Ibaba East",
-    },
-    {
-      name: "Ibaba West",
-    },
-    {
-      name: "Ilaya",
-    },
-    {
-      name: "Lalud",
-    },
-    {
-      name: "Lazareto",
-    },
-    {
-      name: "Libis",
-    },
-    {
-      name: "Lumangbayan",
-    },
-    {
-      name: "Mahal Na Pangalan",
-    },
-    {
-      name: "Maidlang",
-    },
-    {
-      name: "Malad",
-    },
-    {
-      name: "Malamig",
-    },
-    {
-      name: "Managpi",
-    },
-    {
-      name: "Masipit",
-    },
-    {
-      name: "Nag-Iba I",
-    },
-    {
-      name: "Nag-Iba II",
-    },
-    {
-      name: "Navotas",
-    },
-    {
-      name: "Pachoca",
-    },
-    {
-      name: "Palhi",
-    },
-    {
-      name: "Panggalaan",
-    },
-    {
-      name: "Parang",
-    },
-    {
-      name: "Patas",
-    },
-    {
-      name: "Personas",
-    },
-    {
-      name: "Puting Tubig",
-    },
-    {
-      name: "San Raphael (formerly Salong)",
-    },
-    {
-      name: "San Antonio",
-    },
-    {
-      name: "San Vicente Central",
-    },
-    {
-      name: "San Vicente East",
-    },
-    {
-      name: "San Vicente North",
-    },
-    {
-      name: "San Vicente South",
-    },
-    {
-      name: "San Vicente West",
-    },
-    {
-      name: "Sta. Cruz",
-    },
-    {
-      name: "Sta. Isabel",
-    },
-    {
-      name: "Sto. Niño (formerly Nacoco)",
-    },
-    {
-      name: "Sapul",
-    },
-    {
-      name: "Silonay",
-    },
-    {
-      name: "Sta. Maria Village",
-    },
-    {
-      name: "Suqui",
-    },
-    {
-      name: "Tawagan",
-    },
-    {
-      name: "Tawiran",
-    },
-    {
-      name: "Tibag",
-    },
-    {
-      name: "Wawa",
-    },
-  ]
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -807,7 +621,7 @@ const Address = () => {
                   </div>
 
                   <div className="w-full pb-2 hidden">
-                    <label className="block pb-2">Choose your Province</label>
+                    <label className="block pb-2">Province</label>
                     <input
                       type="text"
                       className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}

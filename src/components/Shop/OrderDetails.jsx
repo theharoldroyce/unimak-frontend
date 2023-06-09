@@ -61,6 +61,20 @@ const OrderDetails = () => {
 
   console.log(data?.status);
 
+  const formatTime = (time) => {
+    if (time) {
+      const options = {
+        hour12: true,
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZone: 'Asia/Manila', // Change to Manila, Philippines timezone
+      };
+
+      return new Date(time).toLocaleString('en-US', options);
+    }
+    return "";
+  }
+
 
   return (
     <div className={`py-4 min-h-screen ${styles.section}`}>
@@ -147,12 +161,23 @@ const OrderDetails = () => {
 
       </div>
 
-      <div className="w-full flex items-center justify-between pt-6">
-        <h5 className="text-[#00000084]">
-          Order ID: <span>#{data?._id?.slice(0, 8)}</span>
+      <div className="w-full flex items-center gap-80 pt-6 ">
+        <h5 className="text-black decoration-3">
+          Order ID: <span >#{data?._id?.slice(0, 8)}</span>
         </h5>
-        <h5 className="text-[#00000084]">
-          Placed on: <span>{data?.createdAt?.slice(0, 10)}</span>
+        <h5 className="text-black decoration-3">
+          Order Placed on: <span>{data?.createdAt?.slice(0, 10)}</span> <span>{formatTime(data?.createdAt)}</span>
+        </h5>
+      </div>
+      <div className="w-full flex items-center justify-between pt-6 ">
+        <h5 className="text-[#0000FF] decoration-3">
+          Order Packed on: <span>{data?.packedAt?.slice(0, 10)}</span> <span>{formatTime(data?.packedAt)}</span>
+        </h5>
+        <h5 className="text-[#0000FF] decoration-3">
+          Order In Transit on: <span>{data?.InTransitAt?.slice(0, 10)}</span> <span>{formatTime(data?.InTransitAt)}</span>
+        </h5>
+        <h5 className="text-[#0000FF] decoration-3" >
+          Order Delivered on: <span>{data?.deliveredAt?.slice(0, 10)}</span> <span>{formatTime(data?.deliveredAt)}</span>
         </h5>
       </div>
 
@@ -190,7 +215,9 @@ const OrderDetails = () => {
         <div className="w-full 800px:w-[60%]">
           <h4 className="pt-3 text-[20px] font-[600]">Shipping Address:</h4>
           <h4 className="pt-3 text-[20px]">
-            {data?.shippingAddress.address1 +
+            {data?.shippingAddress.address3 +
+              " " +
+              data?.shippingAddress.address1 +
               " " +
               data?.shippingAddress.address2}
           </h4>

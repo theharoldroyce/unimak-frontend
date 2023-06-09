@@ -18,8 +18,9 @@ const UserOrderDetails = () => {
   const [comment, setComment] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
   const [rating, setRating] = useState(1);
-
+  const [status, setStatus] = useState("");
   const { id } = useParams();
+
 
   useEffect(() => {
     dispatch(getAllOrdersOfUser(user._id));
@@ -63,6 +64,37 @@ const UserOrderDetails = () => {
     })
   };
 
+  const cancelOrderHandler = async () => {
+    try {
+      const response = await axios.put(`${server}/order/order-cancel/${id}`, {
+        status: 'Processing'
+      });
+      toast.success(response.data.message);
+      dispatch(getAllOrdersOfUser(user._id));
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('Failed to cancel the order');
+      }
+    }
+  };
+  
+
+  const formatTime = (time) => {
+    if (time) {
+      const options = {
+        hour12: true,
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZone: 'Asia/Manila', // Change to Manila, Philippines timezone
+      };
+
+      return new Date(time).toLocaleString('en-US', options);
+    }
+    return "";
+  }
+
   return (
     <div className={`py-4 min-h-screen ${styles.section}`}>
       <div className="w-full flex items-center justify-between">
@@ -72,13 +104,28 @@ const UserOrderDetails = () => {
         </div>
       </div>
 
-      <div className="w-full flex items-center justify-between pt-6">
-        <h5 className="text-[#00000084]">
-          Order ID: <span>#{data?._id?.slice(0, 8)}</span>
+      <div className="w-full flex items-center gap-80 pt-6 ">
+        <h5 className="text-black decoration-3">
+          Order ID: <span >#{data?._id?.slice(0, 8)}</span>
         </h5>
-        <h5 className="text-[#00000084]">
-          Placed on: <span>{data?.createdAt?.slice(0, 10)}</span>
+        <h5 className="text-black decoration-3">
+          Order Placed on: <span>{data?.createdAt?.slice(0, 10)}</span> <span>{formatTime(data?.createdAt)}</span>
         </h5>
+      </div>
+      <div className="w-full flex items-center justify-between pt-6 ">
+        <h5 className="text-[#0000FF] decoration-3">
+          Order Packed on: <span>{data?.packedAt?.slice(0, 10)}</span> <span>{formatTime(data?.packedAt)}</span>
+        </h5>
+        <h5 className="text-[#0000FF] decoration-3">
+          Order In Transit on: <span>{data?.InTransitAt?.slice(0, 10)}</span> <span>{formatTime(data?.InTransitAt)}</span>
+        </h5>
+        <h5 className="text-[#0000FF] decoration-3" >
+          Order Delivered on: <span>{data?.deliveredAt?.slice(0, 10)}</span> <span>{formatTime(data?.deliveredAt)}</span>
+        </h5>
+      </div>
+
+      <div>
+
       </div>
 
       {/* order items */}
@@ -197,6 +244,17 @@ const UserOrderDetails = () => {
         </div>
       )}
 
+      <div className="w-full 800px:w-[40%]">
+        <br />
+        {
+          data?.status === "Processing" && (
+            <div className={`${styles.button} text-white`}
+              onClick={cancelOrderHandler}
+            >Cancel Order</div>
+          )
+        }
+      </div>
+
       <div className="border-t w-full text-right">
         <h5 className="pt-3 text-[18px]">
           Total Price: <strong>₱ {data?.totalPrice}</strong>
@@ -208,7 +266,9 @@ const UserOrderDetails = () => {
         <div className="w-full 800px:w-[60%]">
           <h4 className="pt-3 text-[20px] font-[600]">Shipping Address:</h4>
           <h4 className="pt-3 text-[20px]">
-            {data?.shippingAddress.address1 +
+            {data?.shippingAddress.address3 +
+              " " +
+              data?.shippingAddress.address1 +
               " " +
               data?.shippingAddress.address2}
           </h4>
@@ -231,6 +291,11 @@ const UserOrderDetails = () => {
             )
           }
         </div>
+
+        <div>
+
+        </div>
+
       </div>
       <br />
       {/* <Link to="/">

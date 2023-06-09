@@ -66,7 +66,7 @@ const Footer = () => {
         </ul>
 
         <ul className="text-center sm:text-start">
-          <h1 className="mb-1 font-semibold">Shop</h1>
+          <h1 className="mb-1 font-semibold">Terms & Privacy Policy</h1>
           {footercompanyLinks.map((link, index) => (
             <li key={index}>
               <Link
@@ -101,7 +101,7 @@ const Footer = () => {
          text-center pt-2 text-gray-400 text-sm pb-8"
       >
         <span>© 2023 theharoldroyce.</span>
-        <span>Terms · Privacy Policy</span>
+        <span className="hidden">Terms · Privacy Policy</span>
       </div>
     </div>
   );

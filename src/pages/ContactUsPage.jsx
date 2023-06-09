@@ -3,17 +3,17 @@ import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
 import styles from "../styles/styles";
 
-const FAQPage = () => {
+const ContactUsPage = () => {
   return (
     <div>
-      <Header activeHeading={5} />
-      <Faq />
+      <Header activeHeading={3} />
+      <ContactUs />
       <Footer />
     </div>
   );
 };
 
-const Faq = () => {
+const ContactUs = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const toggleTab = (tab) => {
@@ -26,7 +26,7 @@ const Faq = () => {
 
   return (
     <div className={`${styles.section} my-8`}>
-      <h2 className="text-3xl font-bold text-gray-900 mb-8">FAQ</h2>
+      <h2 className="text-3xl font-bold text-gray-900 mb-8">Contact Us</h2>
       <div className="mx-auto space-y-4">
         {/* single Faq */}
 
@@ -36,7 +36,7 @@ const Faq = () => {
             onClick={() => toggleTab(2)}
           >
             <span className="text-lg font-medium text-gray-900">
-              What is your return policy?
+              Contact Us
             </span>
             {activeTab === 2 ? (
               <svg
@@ -71,10 +71,7 @@ const Faq = () => {
           {activeTab === 2 && (
             <div className="mt-4">
               <p className="text-base text-gray-500">
-                If you're not satisfied with your purchase, we accept returns
-                within 30 days of delivery. To initiate a return, please email
-                us at support@myecommercestore.com with your order number and a
-                brief explanation of why you're returning the item.
+                We value your feedback and are here to assist you. If you have any questions, concerns, or suggestions, please don't hesitate to get in touch with us. Our customer support team is available to help you in any way we can.
               </p>
             </div>
           )}
@@ -86,7 +83,7 @@ const Faq = () => {
             onClick={() => toggleTab(3)}
           >
             <span className="text-lg font-medium text-gray-900">
-              How do I track my order?
+              Contact Information
             </span>
             {activeTab === 3 ? (
               <svg
@@ -121,15 +118,19 @@ const Faq = () => {
           {activeTab === 3 && (
             <div className="mt-4">
               <p className="text-base text-gray-500">
-                You can track your order by clicking the tracking link in your
-                shipping confirmation email, or by logging into your account on
-                our website and viewing the order details.
+                - Phone: 09228598977
+              </p>
+              <p className="text-base text-gray-500">
+                - Email: unimakbuilderssupply12@gmail.com
+              </p>
+              <p className="text-base text-gray-500">
+                - Business Hours: Monday to Friday, 9:00 AM to 5:00 PM (GMT)
               </p>
             </div>
           )}
         </div>
 
-        <div className="border-b border-gray-200 pb-4">
+        <div className="border-b border-gray-200 pb-4 hidden">
           <button
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(4)}
@@ -178,7 +179,7 @@ const Faq = () => {
           )}
         </div>
 
-        <div className="border-b border-gray-200 pb-4">
+        <div className="border-b border-gray-200 pb-4 hidden">
           <button
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(5)}
@@ -229,7 +230,7 @@ const Faq = () => {
           )}
         </div>
 
-        <div className="border-b border-gray-200 pb-4">
+        <div className="border-b border-gray-200 pb-4 hidden">
           <button
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(6)}
@@ -276,7 +277,7 @@ const Faq = () => {
           )}
         </div>
 
-        <div className="border-b border-gray-200 pb-4">
+        <div className="border-b border-gray-200 pb-4 hidden">
           <button
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(7)}
@@ -327,4 +328,4 @@ const Faq = () => {
   );
 };
 
-export default FAQPage;
+export default ContactUsPage;

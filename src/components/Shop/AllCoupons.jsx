@@ -1,9 +1,9 @@
-import { Button } from "@material-ui/core";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { AiOutlineDelete } from "react-icons/ai";
-import { RxCross1 } from "react-icons/rx";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { RxCross1, } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/styles";
 import Loader from "../Layout/Loader";
@@ -14,14 +14,17 @@ const AllCoupons = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [coupouns,setCoupouns] = useState([]);
+  const [coupouns, setCoupouns] = useState([]);
   const [minAmount, setMinAmout] = useState(null);
   const [maxAmount, setMaxAmount] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [editCouponId, setEditCouponId] = useState(null);
   const [selectedProducts, setSelectedProducts] = useState(null);
   const [value, setValue] = useState(null);
   const { seller } = useSelector((state) => state.seller);
   const { products } = useSelector((state) => state.products);
 
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,8 +42,13 @@ const AllCoupons = () => {
       });
   }, [dispatch]);
 
+  const handleEdit = (id) => {
+    setEditCouponId(id);
+    setOpen(true);
+  };
+
   const handleDelete = async (id) => {
-    axios.delete(`${server}/coupon/delete-coupon/${id}`,{withCredentials: true}).then((res) => {
+    axios.delete(`${server}/coupon/delete-coupon/${id}`, { withCredentials: true }).then((res) => {
       toast.success("Coupon code deleted succesfully!")
     })
     window.location.reload();
@@ -49,28 +57,56 @@ const AllCoupons = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post(
-        `${server}/coupon/create-coupon-code`,
-        {
-          name,
-          minAmount,
-          maxAmount,
-          selectedProducts,
-          value,
-          shopId: seller._id,
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-       toast.success("Coupon code created successfully!");
-       setOpen(false);
-       window.location.reload();
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
+    if (editCouponId) {
+      // Handle update action
+      await axios
+        .put(
+          `${server}/coupon/update-coupon/${editCouponId}`,
+          {
+            name,
+            minAmount,
+            maxAmount,
+            selectedProducts,
+            status,
+            value,
+            shopId: seller._id,
+          },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          toast.success("Coupon code updated successfully!");
+          setOpen(false);
+          window.location.reload();
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+    } else {
+      // Handle create action
+      await axios
+        .post(
+          `${server}/coupon/create-coupon-code`,
+          {
+            name,
+            minAmount,
+            maxAmount,
+            selectedProducts,
+            value,
+            shopId: seller._id,
+          },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          toast.success("Coupon code created successfully!");
+          setOpen(false);
+          window.location.reload();
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+    }
   };
+
 
   const columns = [
     { field: "id", headerName: "Id", minWidth: 150, flex: 0.7 },
@@ -85,6 +121,28 @@ const AllCoupons = () => {
       headerName: "Value",
       minWidth: 100,
       flex: 0.6,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      minWidth: 100,
+      flex: 0.6,
+    },
+    {
+      field: "edit",
+      flex: 0.8,
+      minWidth: 120,
+      headerName: "Edit",
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <>
+            <Button onClick={() => handleEdit(params.id)}>
+              <AiOutlineEdit size={20} />
+            </Button>
+          </>
+        );
+      },
     },
     {
       field: "Delete",
@@ -108,10 +166,11 @@ const AllCoupons = () => {
   const row = [];
 
   coupouns &&
-  coupouns.forEach((item) => {
+    coupouns.forEach((item) => {
       row.push({
         id: item._id,
         name: item.name,
+        status: item.status,
         price: item.value + " %",
         sold: 10,
       });
@@ -140,7 +199,7 @@ const AllCoupons = () => {
           />
           {open && (
             <div className="fixed top-0 left-0 w-full h-screen bg-[#00000062] z-[20000] flex items-center justify-center">
-              <div className="w-[90%] 800px:w-[40%] h-[80vh] bg-white rounded-md shadow p-4">
+              <div className="w-[90%] 800px:w-[40%] h-[90vh] bg-white rounded-md shadow p-4">
                 <div className="w-full flex justify-end">
                   <RxCross1
                     size={30}
@@ -148,8 +207,11 @@ const AllCoupons = () => {
                     onClick={() => setOpen(false)}
                   />
                 </div>
-                <h5 className="text-[30px] font-Poppins text-center">
+                {/* <h5 className="text-[30px] font-Poppins text-center">
                   Create Coupon code
+                </h5> */}
+                <h5 className="text-[30px] font-Poppins text-center">
+                  {editCouponId ? "Edit Coupon Code" : "Create Coupon Code"}
                 </h5>
                 {/* create coupoun code */}
                 <form onSubmit={handleSubmit} aria-required={true}>
@@ -209,7 +271,19 @@ const AllCoupons = () => {
                     />
                   </div>
                   <br />
-                  <div>
+                  <div className={editCouponId ? "" : "hidden"}>
+                    <label className="pb-2">Status</label>
+                    <select
+                      className="w-full mt-2 border h-[35px] rounded-[5px]"
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
+                    </select>
+                  </div>
+                  <br />
+                  <div className="hidden">
                     <label className="pb-2">Selected Product</label>
                     <select
                       className="w-full mt-2 border h-[35px] rounded-[5px]"
@@ -227,7 +301,6 @@ const AllCoupons = () => {
                         ))}
                     </select>
                   </div>
-                  <br />
                   <div>
                     <input
                       type="submit"

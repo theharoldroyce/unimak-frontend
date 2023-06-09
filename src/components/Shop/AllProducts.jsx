@@ -157,7 +157,7 @@ const AllProducts = () => {
       row.push({
         id: item._id,
         name: item.name,
-        price: "₱ " + item.discountPrice + ".00",
+        price: "₱ " + item.discountPrice,
         Stock: item.stock + " pcs",
         sold: item.sold_out + " pcs",
       });
