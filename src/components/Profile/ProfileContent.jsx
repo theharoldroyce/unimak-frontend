@@ -546,9 +546,6 @@ const Address = () => {
 
   const addressTypeData = [
     {
-      name: "Default",
-    },
-    {
       name: "Home",
     },
     {
