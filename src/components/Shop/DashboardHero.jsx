@@ -303,7 +303,7 @@ const DashboardHero = () => {
           </div>
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500] ">₱ {totalYearSales}</h5>
           <br/>
-          <div className="flex items-center">
+          <div className="flex items-center hidden">
             <FcExternal
               size={30}
               className="mr-2"
@@ -318,7 +318,7 @@ const DashboardHero = () => {
           <h5 className="pt-2 pl-[36px] text-[22px] font-[500] ">₱ {adminBalance}</h5>
         </div>
 
-        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
+        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5 hidden">
           <div className="flex items-center">
             <MdBorderClear size={30} className="mr-2" fill="#00000085" />
             <h3
