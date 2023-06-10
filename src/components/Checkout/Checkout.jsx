@@ -73,16 +73,28 @@ const Checkout = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = couponCode;
-
-    await axios.get(`${server}/coupon/get-coupon-value/${name}`).then((res) => {
-      const shopId = res.data.couponCode?.shopId;
-      const couponCodeValue = res.data.couponCode?.value;
-      if (res.data.couponCode !== null) {
-        const isCouponValid =
-          cart && cart.filter((item) => item.shopId === shopId);
-
+  
+    try {
+      const response = await axios.get(`${server}/coupon/get-coupon-value/${name}`);
+      const couponCode = response.data.couponCode;
+  
+      if (!couponCode) {
+        // Coupon code doesn't exist
+        toast.error("Coupon code doesn't exist!");
+        setCouponCode("");
+      } else if (couponCode.status !== "active") {
+        // Coupon code is inactive
+        toast.error("Coupon code is in valid");
+        setCouponCode("");
+      } else {
+        const shopId = couponCode.shopId;
+        const couponCodeValue = couponCode.value;
+  
+        const isCouponValid = cart && cart.filter((item) => item.shopId === shopId);
+  
         if (isCouponValid.length === 0) {
-          toast.error("Coupon code is not valid for this shop");
+          // Coupon code is not valid
+          toast.error("Coupon code is not valid");
           setCouponCode("");
         } else {
           const eligiblePrice = isCouponValid.reduce(
@@ -91,16 +103,16 @@ const Checkout = () => {
           );
           const discountPrice = (eligiblePrice * couponCodeValue) / 100;
           setDiscountPrice(discountPrice);
-          setCouponCodeData(res.data.couponCode);
+          setCouponCodeData(couponCode);
           setCouponCode("");
         }
       }
-      if (res.data.couponCode === null) {
-        toast.error("Coupon code doesn't exists!");
-        setCouponCode("");
-      }
-    });
+    } catch (error) {
+      console.error(error);
+      toast.error("Invalid Code");
+    }
   };
+
 
   const discountPercentenge = couponCodeData ? discountPrice : "";
 

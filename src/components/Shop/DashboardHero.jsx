@@ -315,7 +315,36 @@ const DashboardHero = () => {
               UpComing Earning's{" "}
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500] ">₱ {adminBalance}</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500] hidden">₱ {adminBalance}</h5>
+        </div>
+        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
+          <div className="flex items-center ">
+            <FcInternal
+              size={30}
+              className="mr-2"
+              fill="#00000085"
+            />
+            <h3
+              className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
+            >
+              Total Current Year Earning{" "}
+            </h3>
+          </div>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500] ">₱ {yearSales}</h5>
+          <br/>
+          <div className="flex items-center">
+            <FcExternal
+              size={30}
+              className="mr-2"
+              fill="#00000085"
+            />
+            <h3
+              className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
+            >
+              Total Previous Year Earning{" "}
+            </h3>
+          </div>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500] ">₱ {lastYearSales}</h5>
         </div>
 
         <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5 hidden">

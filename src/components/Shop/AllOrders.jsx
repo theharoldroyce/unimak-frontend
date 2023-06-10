@@ -1,6 +1,6 @@
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loader from "../Layout/Loader";
@@ -12,10 +12,20 @@ const AllOrders = () => {
   const { seller } = useSelector((state) => state.seller);
 
   const dispatch = useDispatch();
+  const [filteredOrders, setFilteredOrders] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
     dispatch(getAllOrdersOfShop(seller._id));
   }, [dispatch]);
+
+  useEffect(() => {
+    // Filter the orders based on the search keyword
+    const filtered = orders.filter((order) =>
+      order._id.toLowerCase().includes(searchKeyword.toLowerCase())
+    );
+    setFilteredOrders(filtered);
+  }, [orders, searchKeyword]);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -68,17 +78,28 @@ const AllOrders = () => {
     },
   ];
 
-  const row = [];
+  // const row = [];
 
-  orders &&
-    orders.forEach((item) => {
-      row.push({
-        id: item._id,
-        itemsQty: item.cart.length,
-        total: "₱ " + item.totalPrice + ".00",
-        status: item.status,
-      });
-    });
+  // orders &&
+  //   orders.forEach((item) => {
+  //     row.push({
+  //       id: item._id,
+  //       itemsQty: item.cart.length,
+  //       total: "₱ " + item.totalPrice,
+  //       status: item.status,
+  //     });
+  //   });
+
+  const handleSearch = (e) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  const row = filteredOrders.map((item) => ({
+    id: item._id,
+    itemsQty: item.cart.length,
+    total: "₱ " + item.totalPrice,
+    status: item.status,
+  }));
 
   return (
     <>
@@ -86,6 +107,15 @@ const AllOrders = () => {
         <Loader />
       ) : (
         <div className="w-full mx-8 pt-1 mt-10 bg-white">
+          <div className="m-3">
+            <TextField
+              label="Search"
+              variant="outlined"
+              value={searchKeyword}
+              onChange={handleSearch}
+              className="mb-4 w-[50%]"
+            />
+          </div>
           <DataGrid
             rows={row}
             columns={columns}
