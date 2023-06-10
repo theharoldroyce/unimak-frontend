@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
+import { AiOutlineDelete } from "react-icons/ai";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { HiOutlineMinus, HiPlus } from "react-icons/hi";
 import styles from "../../styles/styles";
@@ -32,11 +33,11 @@ const Cart = ({ setOpenCart }) => {
         {cart && cart.length === 0 ? (
           <div className="w-full h-screen flex items-center justify-center">
             <div className="flex w-full justify-end pt-5 pr-5 fixed top-3 right-3">
-               <RxCross1 
+              <RxCross1
                 size={25}
                 className="cursor-pointer"
                 onClick={() => setOpenCart(false)}
-                />
+              />
             </div>
             <h5>Cart Items is empty!</h5>
           </div>
@@ -136,14 +137,15 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
         <div className="pl-[5px]">
           <h1>{data.name}</h1>
           <h4 className="font-[400] text-[15px] text-[#00000082]">
-          ₱{data.discountPrice} * {value}.00
+            ₱{data.discountPrice} * {value}.00
           </h4>
           <h4 className="font-[600] text-[17px] pt-[3px] text-[#d02222] font-Roboto">
-          ₱{totalPrice}.00
+            ₱{totalPrice}.00
           </h4>
         </div>
-        <RxCross1
+        <AiOutlineDelete
           className="cursor-pointer"
+          style={{ fontSize: '40px', color: 'red' }}
           onClick={() => removeFromCartHandler(data)}
         />
       </div>

@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { TextField } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { getSellerAllUsers } from "../../redux/actions/user";
 import { DataGrid } from "@material-ui/data-grid";
-import { AiOutlineDelete } from "react-icons/ai";
-import { Button } from "@material-ui/core";
-import styles from "../../styles/styles";
-import { RxCross1 } from "react-icons/rx";
-import axios from "axios";
-import { server } from "../../server";
-import { toast } from "react-toastify";
+
 
 const AllUser = () => {
     const dispatch = useDispatch();
     const { users } = useSelector((state) => state.user);
-    const [open, setOpen] = useState(false);
-    const [userId, setUserId] = useState("");
+    const [filterValue, setFilterValue] = useState("");
 
     useEffect(() => {
         dispatch(getSellerAllUsers());
     }, [dispatch]);
+
+    const handleFilterChange = (event) => {
+        setFilterValue(event.target.value);
+    };
+
+
     const columns = [
         { field: "id", headerName: "User ID", minWidth: 150, flex: 0.7 },
 
@@ -65,20 +64,40 @@ const AllUser = () => {
             });
         });
 
+    const rows = users
+        ? users.map((item) => ({
+            id: item._id,
+            name: item.name,
+            email: item.email,
+            role: item.role,
+            joinedAt: item.createdAt.slice(0, 10),
+        }))
+        : [];
+
+    const filteredRows = rows.filter((row) => {
+        return row.name.toLowerCase().includes(filterValue.toLowerCase());
+    });
+
+
+
     return (
-        <div className="w-full flex justify-center pt-5">
-            <div className="w-[97%]">
-                <h3 className="text-[22px] font-Poppins pb-2">All Users</h3>
-                <div className="w-full min-h-[45vh] bg-white rounded">
-                    <DataGrid
-                        rows={row}
-                        columns={columns}
-                        pageSize={10}
-                        disableSelectionOnClick
-                        autoHeight
-                    />
-                </div>
+        <div className="w-full mx-8 pt-1 mt-10 bg-white">
+            <div className="m-3">
+                <TextField
+                    label="Search"
+                    variant="outlined"
+                    value={filterValue}
+                    onChange={handleFilterChange}
+                    className="mb-4 w-[50%]"
+                />
             </div>
+            <DataGrid
+                rows={filteredRows}
+                columns={columns}
+                pageSize={10}
+                disableSelectionOnClick
+                autoHeight
+            />
         </div>
     )
 }

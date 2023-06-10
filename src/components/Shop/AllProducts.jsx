@@ -19,6 +19,8 @@ const AllProducts = () => {
   const [category, setCategory] = useState("");
   const [discountPrice, setDiscountPrice] = useState("");
   const [stock, setStock] = useState("");
+  const [filterValue, setFilterValue] = useState("");
+
 
   useEffect(() => {
     dispatch(getAllProductsShop(seller._id));
@@ -27,6 +29,10 @@ const AllProducts = () => {
   const handleDelete = (id) => {
     dispatch(deleteProduct(id));
     window.location.reload();
+  };
+
+  const handleFilterChange = (event) => {
+    setFilterValue(event.target.value);
   };
 
   const handleEdit = (id, name, discountPrice, stock) => {
@@ -150,19 +156,32 @@ const AllProducts = () => {
     },
   ];
 
-  const row = [];
+  // const row = [];
 
-  products &&
-    products.forEach((item) => {
-      row.push({
-        id: item._id,
-        name: item.name,
-        price: "₱ " + item.discountPrice,
-        Stock: item.stock + " pcs",
-        sold: item.sold_out + " pcs",
-      });
-    });
+  // products &&
+  //   products.forEach((item) => {
+  //     row.push({
+  //       id: item._id,
+  //       name: item.name,
+  //       price: "₱ " + item.discountPrice,
+  //       Stock: item.stock + " pcs",
+  //       sold: item.sold_out + " pcs",
+  //     });
+  //   });
 
+  const rows = products
+    ? products.map((item) => ({
+      id: item._id,
+      name: item.name,
+      price: "₱ " + item.discountPrice,
+      Stock: item.stock + " pcs",
+      sold: item.sold_out + " pcs",
+    }))
+    : [];
+
+  const filteredRows = rows.filter((row) => {
+    return row.name.toLowerCase().includes(filterValue.toLowerCase());
+  });
 
   return (
     <>
@@ -170,8 +189,17 @@ const AllProducts = () => {
         <Loader />
       ) : (
         <div className="w-full mx-8 pt-1 mt-10 bg-white">
+          <div className="m-3">
+            <TextField
+              label="Search"
+              variant="outlined"
+              value={filterValue}
+              onChange={handleFilterChange}
+              className="mb-4 w-[50%]"
+            />
+          </div>
           <DataGrid
-            rows={row}
+            rows={filteredRows}
             columns={columns}
             pageSize={10}
             disableSelectionOnClick

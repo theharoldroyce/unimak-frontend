@@ -55,7 +55,7 @@ const ProfileSidebar = ({ setActive, active }) => {
             active === 2 ? "text-[red]" : ""
           } 800px:block hidden`}
         >
-          Orders
+          View Orders
         </span>
       </div>
       <div
@@ -87,7 +87,7 @@ const ProfileSidebar = ({ setActive, active }) => {
       </div>
 
       <div
-        className="flex items-center cursor-pointer w-full mb-8"
+        className="flex items-center cursor-pointer w-full mb-8 hidden"
         onClick={() => setActive(5)}
       >
         <MdOutlineTrackChanges size={20} color={active === 5 ? "red" : ""} />

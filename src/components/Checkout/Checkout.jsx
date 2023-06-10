@@ -6,6 +6,9 @@ import { useEffect } from "react";
 import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import Address from "../Modals/Address";
+import AddressCreate from "../Modals/AddressCreate";
 
 
 const Checkout = () => {
@@ -57,7 +60,7 @@ const Checkout = () => {
     }
   };
 
-  const createaddress = () =>{
+  const createaddress = () => {
     navigate("/profile");
     toast.error("Please choose your delivery address!")
   }
@@ -73,11 +76,11 @@ const Checkout = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = couponCode;
-  
+
     try {
       const response = await axios.get(`${server}/coupon/get-coupon-value/${name}`);
       const couponCode = response.data.couponCode;
-  
+
       if (!couponCode) {
         // Coupon code doesn't exist
         toast.error("Coupon code doesn't exist!");
@@ -89,9 +92,9 @@ const Checkout = () => {
       } else {
         const shopId = couponCode.shopId;
         const couponCodeValue = couponCode.value;
-  
+
         const isCouponValid = cart && cart.filter((item) => item.shopId === shopId);
-  
+
         if (isCouponValid.length === 0) {
           // Coupon code is not valid
           toast.error("Coupon code is not valid");
@@ -187,6 +190,23 @@ const ShippingInfo = ({
   setZipCode,
 }) => {
 
+  const [showAddressComponent, setShowAddressComponent] = useState(false);
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleConfirmDialog = () => {
+    // Perform confirmation logic
+    setOpenDialog(false);
+  };
+
   return (
     <div className="w-full 800px:w-[95%] bg-white rounded-md p-5 pb-8">
       <h5 className="text-[18px] font-[500]">Shipping Address</h5>
@@ -196,22 +216,10 @@ const ShippingInfo = ({
           <div className="w-[50%]">
             <label className="block pb-2">Full Name</label>
             <h5 className="text-[18px] font-[600]">{user && user.name}</h5>
-            {/* <input
-              type="text"
-              value={user && user.name}
-              required
-              className={`${styles.input} !w-[95%] outline-0`}
-            /> */}
           </div>
           <div className="w-[50%]">
             <label className="block pb-2">Email Address</label>
             <h5 className="text-[18px] font-[600]">{user && user.email}</h5>
-            {/* <input
-              type="email"
-              value={user && user.email}
-              required
-              className={`${styles.input}`}
-            /> */}
           </div>
         </div>
 
@@ -219,19 +227,12 @@ const ShippingInfo = ({
           <div className="w-[50%]">
             <label className="block pb-2">Phone Number</label>
             <h5 className="text-[18px] font-[600]">{user && user.phoneNumber}</h5>
-            {/* <input
-              type="number"
-              required
-              value={user && user.phoneNumber}
-              className={`${styles.input} !w-[95%]`}
-            /> */}
           </div>
           <div className="w-[50%] hidden">
             <label className="block pb-2">Zip Code</label>
             <input
               type="number"
               value={zipCode}
-              // onChange={(e) => setZipCode(e.target.value)}
               required
               disabled
               className={`${styles.input}`}
@@ -243,54 +244,14 @@ const ShippingInfo = ({
           <div className="w-[50%]">
             <label className="block pb-2 hidden">Country</label>
             <h5 className="text-[18px] font-[600]">{country}</h5>
-            {/* <select
-              className="w-[95%] border h-[40px] rounded-[5px]"
-              value={country}
-              disabled
-            // onChange={(e) => setCountry(e.target.value)}
-            >
-              <option className="block pb-2" value="">
-                country
-              </option>
-              {Country &&
-                Country.getAllCountries().map((item) => (
-                  <option key={item.isoCode} value={item.isoCode}>
-                    {item.name}
-                  </option>
-                ))}
-            </select> */}
           </div>
           <div className="w-[50%]">
             <label className="block pb-2 hidden">Province</label>
             <h5 className="text-[18px] font-[600]">{city}</h5>
-            {/* <select
-              className="w-[95%] border h-[40px] rounded-[5px]"
-              value={city}
-              disabled
-            // onChange={(e) => setCity(e.target.value)}
-            >
-              <option className="block pb-2" value="">
-                province
-              </option>
-              {State &&
-                State.getStatesOfCountry(country).map((item) => (
-                  <option key={item.isoCode} value={item.isoCode}>
-                    {item.name}
-                  </option>
-                ))}
-            </select> */}
           </div>
           <div className="w-[50%]">
             <label className="block pb-2 hidden">City / Municipality</label>
             <h5 className="text-[18px] font-[600]">{address1}</h5>
-            {/* <input
-              type="address"
-              required
-              disabled
-              value={address1}
-              // onChange={(e) => setAddress1(e.target.value)}
-              className={`${styles.input} !w-[95%]`}
-            /> */}
           </div>
         </div>
 
@@ -299,27 +260,11 @@ const ShippingInfo = ({
           <div className="w-[50%]">
             <label className="block pb-2 hidden">House # / Street </label>
             <h5 className="text-[18px] font-[600]">{address2}</h5>
-            {/* <input
-              type="address"
-              value={address2}
-              // onChange={(e) => setAddress2(e.target.value)}
-              required
-              disabled
-              className={`${styles.input}`}
-            /> */}
           </div>
 
           <div className="w-[50%]">
             <label className="block pb-2 hidden">House # / Street</label>
             <h5 className="text-[18px] font-[600]">{address3}</h5>
-            {/* <input
-              type="address"
-              value={address2}
-              // onChange={(e) => setAddress2(e.target.value)}
-              required
-              disabled
-              className={`${styles.input}`}
-            /> */}
           </div>
         </div>
 
@@ -330,45 +275,47 @@ const ShippingInfo = ({
           className={`${styles.button} w-[50%] h-[40px] text-center rounded-[3px] mt-8 cursor-pointer`}
           onClick={() => setUserInfo(!userInfo)}
         >
-          <h5 className="text-white"> Choose From saved address</h5>
+          <h5 className="text-white"> Choose Delivery Address </h5>
         </div>
-        {/* <div
-          className={`${styles.button} w-[50%] h-[40px] text-center rounded-[3px] mt-8 cursor-pointer`}
-        >
-          <h5 className="text-white">Create Delivery Address</h5>
-        </div> */}
       </div>
 
-      {/* <h5
-        className="text-[18px] cursor-pointer inline-block"
-        onClick={() => setUserInfo(!userInfo)}
-      >
-        Choose From saved address
-      </h5> */}
-      
-      {userInfo && (
+      {userInfo ? (
         <div>
-          {user &&
+          {user && user.addresses.length > 0 ? (
             user.addresses.map((item, index) => (
-              <div className="w-full flex mt-1">
+              <div className="w-full flex mt-1" key={index}>
                 <input
                   type="checkbox"
                   className="mr-3"
                   value={item.addressType}
-                  onClick={() =>
-                    setAddress1(item.address1) ||
-                    setAddress2(item.address2) ||
-                    setAddress3(item.address3) ||
-                    setZipCode(item.zipCode) ||
-                    setCountry(item.country) ||
-                    setCity(item.city)
-                  }
+                  onClick={() => {
+                    setAddress1(item.address1);
+                    setAddress2(item.address2);
+                    setAddress3(item.address3);
+                    setZipCode(item.zipCode);
+                    setCountry(item.country);
+                    setCity(item.city);
+                  }}
                 />
                 <h2>{item.addressType}</h2>
               </div>
-            ))}
+            ))
+          ) : (
+            // <Button onClick={() => setShowAddressComponent(true)}>Create address</Button>
+            <Button
+              onClick={handleOpenDialog}
+              className={`w-full h-[40px] border border-[#f63b60] text-center text-[#f63b60] rounded-[3px] mt-8 cursor-pointer`}
+            >Create Delivery Address</Button>
+          )}
         </div>
-      )}
+      ) : null}
+      {/* {showAddressComponent && <Address />} */}
+      <AddressCreate
+        open={openDialog}
+        title="Create Delivery Address"
+        onClose={handleCloseDialog}
+        onConfirm={handleConfirmDialog}
+      />
     </div>
   );
 };
