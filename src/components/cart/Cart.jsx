@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoBagHandleOutline } from "react-icons/io5";
-import { HiOutlineMinus, HiPlus } from "react-icons/hi";
+import { HiOutlineMinus, HiPlus, HiArchive } from "react-icons/hi";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { backend_url } from "../../server";
@@ -79,7 +79,7 @@ const Cart = ({ setOpenCart }) => {
                   className={`h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]`}
                 >
                   <h1 className="text-[#fff] text-[18px] font-[600]">
-                    Checkout Now (₱{totalPrice}.00)
+                    Checkout Now (₱{totalPrice})
                   </h1>
                 </div>
               </Link>
@@ -128,6 +128,13 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
           >
             <HiOutlineMinus size={16} color="#7d879c" />
           </div>
+          <div className="mt-4">
+            <HiArchive
+              size={30}
+              color="#e44343"
+              onClick={() => removeFromCartHandler(data)}
+            />
+          </div>
         </div>
         <img
           src={`${backend_url}${data?.images[0]}`}
@@ -137,14 +144,14 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
         <div className="pl-[5px]">
           <h1>{data.name}</h1>
           <h4 className="font-[400] text-[15px] text-[#00000082]">
-            ₱{data.discountPrice} * {value}.00
+            ₱{data.discountPrice} * {value}
           </h4>
           <h4 className="font-[600] text-[17px] pt-[3px] text-[#d02222] font-Roboto">
-            ₱{totalPrice}.00
+            ₱{totalPrice}
           </h4>
         </div>
         <AiOutlineDelete
-          className="cursor-pointer"
+          className="cursor-pointer hidden"
           style={{ fontSize: '40px', color: 'red' }}
           onClick={() => removeFromCartHandler(data)}
         />

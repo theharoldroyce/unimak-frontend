@@ -91,10 +91,9 @@ const ProductCard = ({ data, isEvent }) => {
                 {data.originalPrice === 0
                   ? data.originalPrice
                   : data.discountPrice}
-                .00
               </h5>
-              <h4 className={`${styles.price}`}>
-                {data.originalPrice ? data.originalPrice + ".00" : null}
+              <h4 className={`${styles.price} hidden`}>
+                {data.originalPrice ? data.originalPrice : null}
               </h4>
             </div>
             <span className="font-[400] text-[17px] text-[#68d284]">
