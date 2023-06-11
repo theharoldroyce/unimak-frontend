@@ -59,7 +59,7 @@ const ProfileSidebar = ({ setActive, active }) => {
         </span>
       </div>
       <div
-        className="flex items-center cursor-pointer w-full mb-8"
+        className="flex items-center cursor-pointer w-full mb-8 hidden"
         onClick={() => setActive(3)}
       >
         <HiOutlineReceiptRefund size={20} color={active === 3 ? "red" : ""} />

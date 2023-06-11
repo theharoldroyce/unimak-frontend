@@ -79,7 +79,7 @@ const UserOrderDetails = () => {
       }
     }
   };
-  
+
 
   const formatTime = (time) => {
     if (time) {
@@ -253,6 +253,11 @@ const UserOrderDetails = () => {
             >Cancel Order</div>
           )
         }
+        {
+          (data?.status === "Cancelled Order" || data?.status === "Packed" || data?.status === "Out of Stock" || data?.status === "In Transit" || data?.status === "Delivered" || data?.status === "Refund Success" || data?.status === "Cancel Refund") ? (
+            <h2 className="pt-3 pb-3 text-[20px] font-[600] text-red-500 "> {data?.status}</h2>
+          ) : null
+        }
       </div>
 
       <div className="border-t w-full text-right">
@@ -287,7 +292,7 @@ const UserOrderDetails = () => {
             data?.status === "Delivered" && (
               <div className={`${styles.button} text-white`}
                 onClick={refundHandler}
-              >Give a Refund</div>
+              >Request a Refund</div>
             )
           }
         </div>

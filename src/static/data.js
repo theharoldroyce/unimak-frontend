@@ -602,7 +602,7 @@ export const footerProductLinks = [
     link: "/about"
   },
   {
-    name: "Conact us",
+    name: "Contact us",
     link: "/contact"
   }
 ];

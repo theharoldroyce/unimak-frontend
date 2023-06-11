@@ -36,14 +36,14 @@ const EventCard = ({ active, data }) => {
       </div>
       <div className="w-full lg:[w-50%] flex flex-col justify-center">
         <h2 className={`${styles.productTitle}`}>{data.name}</h2>
-        <p>{data.description}</p>
+        <p className="hidden">{data.description}</p>
         <div className="flex py-2 justify-between">
           <div className="flex">
             <h5 className="font-[500] text-[18px] text-[#d55b45] pr-3 line-through">
             ₱{data.originalPrice}
             </h5>
             <h5 className="font-bold text-[20px] text-[#333] font-Roboto">
-            {data.discountPrice}
+            ₱{data.discountPrice}
             </h5>
           </div>
           <span className="pr-3 font-[400] text-[17px] text-[#44a55e]">

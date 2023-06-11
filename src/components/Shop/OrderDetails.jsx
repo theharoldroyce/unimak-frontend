@@ -95,70 +95,67 @@ const OrderDetails = () => {
       <div className="w-full flex items-center justify-flex gap-16 pt-6">
         <h2 className="pt-3 text-[20px] font-[600]">Order Status:</h2>
         {data?.status !== "Processing refund" && data?.status !== "Refund Success" && data?.status !== "Cancel Refund" && (
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
-          >
-            {[
-              "Processing",
-              "Packed",
-              "In Transit",
-              "Cancel Order",
-              "Out of Stock",
-              "Delivered",
-            ]
-              .slice(
-                [
-                  "Processing",
-                  "Packed",
-                  "In Transit",
-                  "Cancel Order",
-                  "Out of Stock",
-                  "Delivered",
-                ].indexOf(data?.status)
-              )
-              .map((option, index) => (
+          <>
+            {(data?.status === "Cancelled Order" || data?.status === "Delivered" || data?.status === "Out of Stock") ? (
+              <h2 className="pt-3 text-[20px] font-[600] text-red-500">{data?.status}</h2>
+            ) : (
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
+              >
+                {data?.status === "Processing" && (
+                  <>
+                    <option value="Processing">Processing</option>
+                    <option value="Packed">Packed</option>
+                    <option value="Out of Stock">Out of Stock</option>
+                  </>
+                )}
+                {data?.status === "Packed" && (
+                  <>
+                    <option value="Packed">Packed</option>
+                    <option value="In Transit">In Transit</option>
+                  </>
+                )}
+                {data?.status === "In Transit" && (
+                  <>
+                    <option value="In Transit">In Transit</option>
+                    <option value="Delivered">Delivered</option>
+                  </>
+                )}
+              </select>
+            )}
+          </>
+        )}
+
+        {
+          data?.status === "Processing refund" ? (
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
+            >
+              {["Processing refund", "Cancel Refund", "Refund Success"].map((option, index) => (
                 <option value={option} key={index}>
                   {option}
                 </option>
               ))}
-          </select>
-        )}
-        {
-          data?.status === "Processing refund" || data?.status === "Refund Success" || data?.status === "Cancel Refund" ? (
-            <select value={status}
-              onChange={(e) => setStatus(e.target.value)}
-              className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
-            >
-              {[
-                "Processing refund",
-                "Cancel Refund",
-                "Refund Success",
-              ]
-                .slice(
-                  [
-                    "Processing refund",
-                    "Cancel Refund",
-                    "Refund Success",
-                  ].indexOf(data?.status)
-                )
-                .map((option, index) => (
-                  <option value={option} key={index}>
-                    {option}
-                  </option>
-                ))}
             </select>
-          ) : null
+          ) : (
+            (data?.status === "Refund Success" || data?.status === "Cancel Refund") ? (
+              <h2 className="pt-3 text-[20px] font-[600] text-red-500">{data?.status}</h2>
+            ) : null
+          )
         }
 
-        <div
-          className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
-          onClick={data?.status !== "Processing refund" ? orderUpdateHandler : refundOrderUpdateHandler}
-        >
-          Update Status
-        </div>
-
+        {data?.status !== "Cancelled Order" && data?.status !== "Out of Stock" && data?.status !== "Delivered" && data?.status !== "Cancel Refund" && data?.status !== "Refund Success" && (
+          <div
+            className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
+            onClick={data?.status !== "Processing refund" ? orderUpdateHandler : refundOrderUpdateHandler}
+          >
+            Update Status
+          </div>
+        )}
       </div>
 
       <div className="w-full flex items-center gap-80 pt-6 ">

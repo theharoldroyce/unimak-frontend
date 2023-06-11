@@ -208,12 +208,12 @@ const AllOrders = () => {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Order ID", minWidth: 200, flex: 0.7 },
 
     {
       field: "status",
       headerName: "Status",
-      minWidth: 130,
+      minWidth: 100,
       flex: 0.7,
       cellClassName: (params) => {
         return params.getValue(params.id, "status") === "Delivered"
@@ -222,25 +222,17 @@ const AllOrders = () => {
       },
     },
     {
-      field: "itemsQty",
-      headerName: "Items Qty",
-      type: "number",
-      minWidth: 130,
-      flex: 0.7,
-    },
-
-    {
       field: "total",
       headerName: "Total",
       type: "number",
-      minWidth: 130,
-      flex: 0.8,
+      minWidth: 100,
+      flex: 0.7,
     },
 
     {
       field: " ",
       flex: 1,
-      minWidth: 150,
+      minWidth: 90,
       headerName: "",
       type: "number",
       sortable: false,
@@ -264,8 +256,7 @@ const AllOrders = () => {
     orders.forEach((item) => {
       row.push({
         id: item._id,
-        itemsQty: item.cart.length,
-        total: "₱ " + item.totalPrice + ".00",
+        total: "₱ " + item.totalPrice,
         status: item.status,
       });
     });

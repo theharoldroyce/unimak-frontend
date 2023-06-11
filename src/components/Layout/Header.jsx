@@ -111,9 +111,8 @@ const Header = ({ activeHeading }) => {
         </div>
       </div>
       <div
-        className={`${
-          active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
-        } transition hidden 800px:flex items-center justify-between w-full bg-amber-600 h-[70px]`}
+        className={`${active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
+          } transition hidden 800px:flex items-center justify-between w-full bg-amber-600 h-[70px]`}
       >
         <div
           className={`${styles.section} relative ${styles.noramlFlex} justify-between`}
@@ -204,9 +203,8 @@ const Header = ({ activeHeading }) => {
 
       {/* mobile header */}
       <div
-        className={`${
-          active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
-        }
+        className={`${active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
+          }
       w-full h-[60px] bg-[#fff] z-50 top-0 left-0 shadow-sm 800px:hidden`}
       >
         <div className="w-full flex items-center justify-between">
@@ -277,27 +275,25 @@ const Header = ({ activeHeading }) => {
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
-                {searchData && (
-                  <div className="absolute bg-[#fff] z-10 shadow w-full left-0 p-3">
-                    {searchData.map((i) => {
-                      const d = i.name;
-
-                      const Product_name = d.replace(/\s+/g, "-");
-                      return (
-                        <Link to={`/product/${Product_name}`}>
-                          <div className="flex items-center">
-                            <img
-                              src={i.image_Url[0].url}
-                              alt=""
-                              className="w-[50px] mr-2"
-                            />
-                            <h5>{i.name}</h5>
-                          </div>
-                        </Link>
-                      );
-                    })}
+                {searchData && searchData.length !== 0 ? (
+                  <div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
+                    {searchData &&
+                      searchData.map((i, index) => {
+                        return (
+                          <Link to={`/product/${i._id}`}>
+                            <div className="w-full flex items-start-py-3">
+                              <img
+                                src={`${backend_url}${i.images[0]}`}
+                                alt=""
+                                className="w-[40px] h-[40px] mr-[10px]"
+                              />
+                              <h1>{i.name}</h1>
+                            </div>
+                          </Link>
+                        );
+                      })}
                   </div>
-                )}
+                ) : null}
               </div>
 
               <Navbar active={activeHeading} />
