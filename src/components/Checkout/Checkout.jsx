@@ -190,12 +190,12 @@ const ShippingInfo = ({
   setZipCode,
 }) => {
 
-  const [showAddressComponent, setShowAddressComponent] = useState(false);
 
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
+    setUserInfo(true);
   };
 
   const handleCloseDialog = () => {
@@ -212,23 +212,23 @@ const ShippingInfo = ({
       <h5 className="text-[18px] font-[500]">Shipping Address</h5>
       <br />
       <form>
-        <div className="w-full flex pb-3">
-          <div className="w-[50%]">
+        <div className="w-full flex flex-col pb-3 md:flex-row">
+          <div className="w-full md:w-[50%]">
             <label className="block pb-2">Full Name</label>
             <h5 className="text-[18px] font-[600]">{user && user.name}</h5>
           </div>
-          <div className="w-[50%]">
+          <div className="w-full md:w-[50%]">
             <label className="block pb-2">Email Address</label>
             <h5 className="text-[18px] font-[600]">{user && user.email}</h5>
           </div>
         </div>
 
-        <div className="w-full flex pb-3">
-          <div className="w-[50%]">
+        <div className="w-full flex flex-col pb-3 md:flex-row">
+          <div className="w-full md:w-[50%]">
             <label className="block pb-2">Phone Number</label>
             <h5 className="text-[18px] font-[600]">{user && user.phoneNumber}</h5>
           </div>
-          <div className="w-[50%] hidden">
+          <div className="w-full md:w-[50%] hidden">
             <label className="block pb-2">Zip Code</label>
             <input
               type="number"
@@ -240,42 +240,41 @@ const ShippingInfo = ({
           </div>
         </div>
 
-        <div className="w-full flex pb-3">
-          <div className="w-[50%]">
-            <label className="block pb-2 hidden">Country</label>
+
+        <div className="w-full flex flex-col pb-3 md:flex-row hidden">
+          <div className="w-full md:w-[50%] ">
             <h5 className="text-[18px] font-[600]">{country}</h5>
           </div>
-          <div className="w-[50%]">
-            <label className="block pb-2 hidden">Province</label>
+          <div className="w-full md:w-[50%]">
+            <label className="block pb-2">Province</label>
             <h5 className="text-[18px] font-[600]">{city}</h5>
-          </div>
-          <div className="w-[50%]">
-            <label className="block pb-2 hidden">City / Municipality</label>
-            <h5 className="text-[18px] font-[600]">{address1}</h5>
           </div>
         </div>
 
-        <div className="w-full flex pb-3">
-
-          <div className="w-[50%]">
-            <label className="block pb-2 hidden">House # / Street </label>
+        <div className="w-full flex flex-col pb-3 md:flex-row">
+          <div className="w-full md:w-[50%]">
+            <h5 className="text-[18px] font-[600]">{address1}</h5>
+          </div>
+          <div className="w-full md:w-[50%]">
             <h5 className="text-[18px] font-[600]">{address2}</h5>
           </div>
 
-          <div className="w-[50%]">
-            <label className="block pb-2 hidden">House # / Street</label>
+          <div className="w-full md:w-[50%]">
             <h5 className="text-[18px] font-[600]">{address3}</h5>
           </div>
         </div>
 
         <div></div>
       </form>
+
       <div className="w-full flex pb-3 gap-5">
-        <div
-          className={`${styles.button} w-[50%] h-[40px] text-center rounded-[3px] mt-8 cursor-pointer`}
-          onClick={() => setUserInfo(!userInfo)}
-        >
-          <h5 className="text-white"> Choose Delivery Address </h5>
+        <div className="w-full md:w-1/2 h-[40px] md:h-auto mx-auto mt-8 cursor-pointer">
+          <button
+            className="w-full h-full text-center rounded-[3px] bg-black text-white"
+            onClick={() => setUserInfo(!userInfo)}
+          >
+            <h5 className="p-2">Choose Delivery Address</h5>
+          </button>
         </div>
       </div>
 
@@ -301,14 +300,22 @@ const ShippingInfo = ({
               </div>
             ))
           ) : (
-            // <Button onClick={() => setShowAddressComponent(true)}>Create address</Button>
-            <Button
-              onClick={handleOpenDialog}
-              className={`w-full h-[40px] border border-[#f63b60] text-center text-[#f63b60] rounded-[3px] mt-8 cursor-pointer`}
-            >Create Delivery Address</Button>
+
+            <div className="w-full flex pb-3 gap-5">
+            <div className="w-full md:w-1/2 h-[40px] md:h-auto mx-auto mt-8 cursor-pointer">
+              <button
+                className="w-full h-full text-center rounded-[3px] bg-black text-white"
+                onClick={handleOpenDialog}
+              >
+                <h5 className="p-2">Create Delivery Address</h5>
+              </button>
+            </div>
+          </div>
+
           )}
         </div>
       ) : null}
+      
       {/* {showAddressComponent && <Address />} */}
       <AddressCreate
         open={openDialog}

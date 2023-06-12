@@ -85,7 +85,7 @@ const ProductDetails = ({ data }) => {
       0
     );
 
-  const avg =  totalRatings / totalReviewsLength || 0;
+  const avg = totalRatings / totalReviewsLength || 0;
 
   const averageRating = avg.toFixed(2);
 
@@ -159,7 +159,7 @@ const ProductDetails = ({ data }) => {
                   </h3>
                 </div>
 
-                <div className="flex items-center mt-12 justify-end pr-3">
+                <div className="flex items-center mt-12 justify-start lg:justify-end pr-3">
                   <div className="hidden">
                     <button
                       className="bg-gradient-to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
@@ -224,7 +224,7 @@ const ProductDetails = ({ data }) => {
                     </h5>
                   </div>
                   <div
-                    className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
+                    className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11 hidden lg:block`}
                     onClick={handleMessageSubmit}
                   >
                     <span className="text-white flex items-center">
@@ -232,6 +232,14 @@ const ProductDetails = ({ data }) => {
                     </span>
                   </div>
                 </div>
+                <div
+                    className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11 md:hidden`}
+                    onClick={handleMessageSubmit}
+                  >
+                    <span className="text-white flex items-center">
+                      Send Message <AiOutlineMessage className="ml-1" />
+                    </span>
+                  </div>
               </div>
             </div>
           </div>
@@ -244,8 +252,9 @@ const ProductDetails = ({ data }) => {
           <br />
           <br />
         </div>
-      ) : null}
-    </div>
+  ) : null
+}
+    </div >
   );
 };
 
