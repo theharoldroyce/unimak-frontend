@@ -104,28 +104,25 @@ const UserOrderDetails = () => {
         </div>
       </div>
 
-      <div className="w-full flex items-center gap-80 pt-6 ">
+      <div className="w-full flex flex-col md:items-center pt-6 space-y-4 md:flex-row md:justify-between md:items-center md:gap-4">
         <h5 className="text-black decoration-3">
-          Order ID: <span >#{data?._id?.slice(0, 8)}</span>
+          Order ID: <span>#{data?._id?.slice(0, 8)}</span>
         </h5>
         <h5 className="text-black decoration-3">
           Order Placed on: <span>{data?.createdAt?.slice(0, 10)}</span> <span>{formatTime(data?.createdAt)}</span>
         </h5>
       </div>
-      <div className="w-full flex items-center justify-between pt-6 ">
-        <h5 className="text-[#0000FF] decoration-3">
+
+      <div className="w-full flex flex-col md:items-center pt-6 space-y-4 md:flex-row md:justify-between md:items-center md:gap-4">
+        <h5 className="text-blue-500 decoration-3">
           Order Packed on: <span>{data?.packedAt?.slice(0, 10)}</span> <span>{formatTime(data?.packedAt)}</span>
         </h5>
-        <h5 className="text-[#0000FF] decoration-3">
+        <h5 className="text-blue-500 decoration-3">
           Order In Transit on: <span>{data?.InTransitAt?.slice(0, 10)}</span> <span>{formatTime(data?.InTransitAt)}</span>
         </h5>
-        <h5 className="text-[#0000FF] decoration-3" >
+        <h5 className="text-blue-500 decoration-3">
           Order Delivered on: <span>{data?.deliveredAt?.slice(0, 10)}</span> <span>{formatTime(data?.deliveredAt)}</span>
         </h5>
-      </div>
-
-      <div>
-
       </div>
 
       {/* order items */}
@@ -134,34 +131,36 @@ const UserOrderDetails = () => {
       {data &&
         data?.cart.map((item, index) => {
           return (
-            <div className="w-full flex items-start mb-5">
+            <div className="w-full flex flex-col items-start mb-5 space-y-2 md:flex-row md:items-center md:space-y-0">
               <img
                 src={`${backend_url}/${item.images[0]}`}
                 alt=""
-                className="w-[80x] h-[80px]"
+                className="w-20 h-20 md:w-80 md:h-80"
               />
-              <div className="w-full">
-                <h5 className="pl-3 text-[20px]">{item.name}</h5>
-                <h5 className="pl-3 text-[20px] text-[#00000091]">
+              <div className="flex flex-col md:flex-row md:flex-1 md:justify-between md:items-center">
+                <h5 className="pl-3 text-2xl">{item.name}</h5>
+                <h5 className="pl-3 text-2xl text-gray-600">
                   ₱ {item.discountPrice} x {item.qty}
                 </h5>
               </div>
-              {!item.isReviewed && data?.status === "Delivered" ? <div
-                className={`${styles.button} text-[#fff]`}
-                onClick={() => setOpen(true) || setSelectedItem(item)}
-              >
-                Write a review
-              </div> : (
-                null
+              
+              {!item.isReviewed && data?.status === "Delivered" && (
+                <div
+                  className={`${styles.button} text-white mt-3 md:mt-0`}
+                  onClick={() => setOpen(true) || setSelectedItem(item)}
+                >
+                  Write a review
+                </div>
               )}
             </div>
+
           )
         })}
 
       {/* review popup */}
       {open && (
-        <div className="w-full fixed top-0 left-0 h-screen bg-[#0005] z-50 flex items-center justify-center">
-          <div className="w-[50%] h-min bg-[#fff] shadow rounded-md p-3">
+        <div className="w-full fixed top-0 left-0 h-screen bg-black bg-opacity-50 z-50 flex flex-col items-center justify-center">
+          <div className="w-11/12 md:w-[50%] max-h-[90vh] bg-white shadow rounded-md p-3">
             <div className="w-full flex justify-end p-3">
               <RxCross1
                 size={30}
@@ -191,30 +190,29 @@ const UserOrderDetails = () => {
             <br />
 
             {/* ratings */}
-            <h5 className="pl-3 text-[20px] font-[500]">
+            <h5 className="pl-3 text-lg font-semibold">
               Give a Rating <span className="text-red-500">*</span>
             </h5>
-            <div className="flex w-full ml-2 pt-1">
+            <div className="flex flex-wrap items-center w-full ml-2 pt-1">
               {[1, 2, 3, 4, 5].map((i) =>
                 rating >= i ? (
                   <AiFillStar
                     key={i}
-                    className="mr-1 cursor-pointer"
-                    color="rgb(246,186,0)"
-                    size={25}
+                    className="mr-1 cursor-pointer text-yellow-500"
+                    size={6}
                     onClick={() => setRating(i)}
                   />
                 ) : (
                   <AiOutlineStar
                     key={i}
-                    className="mr-1 cursor-pointer"
-                    color="rgb(246,186,0)"
-                    size={25}
+                    className="mr-1 cursor-pointer text-yellow-500"
+                    size={6}
                     onClick={() => setRating(i)}
                   />
                 )
               )}
             </div>
+
             <br />
             <div className="w-full ml-3">
               <label className="block text-[20px] font-[500]">
@@ -260,7 +258,7 @@ const UserOrderDetails = () => {
         }
       </div>
 
-      <div className="border-t w-full text-right">
+      <div className="border-t w-full text-left">
         <h5 className="pt-3 text-[18px]">
           Total Price: <strong>₱ {data?.totalPrice}</strong>
         </h5>

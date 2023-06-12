@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {barangayData} from "../../static/data"
+import { barangayData } from "../../static/data"
 import {
   AiOutlineArrowRight,
   AiOutlineCamera,
@@ -544,7 +544,7 @@ const Address = () => {
     },
   ];
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -582,8 +582,8 @@ const Address = () => {
   return (
     <div className="w-full px-5">
       {open && (
-        <div className="fixed w-full h-screen bg-[#0000004b] top-0 left-0 flex items-center justify-center ">
-          <div className="w-[35%] h-[80vh] bg-white rounded shadow relative overflow-y-scroll">
+        <div className="fixed w-full min-h-screen bg-[#0000004b] top-0 left-0 flex items-center justify-center">
+          <div className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 xl:w-1/3 h-[80vh] bg-white rounded shadow relative overflow-y-scroll">
             <div className="w-full flex justify-end p-3">
               <RxCross1
                 size={30}
@@ -591,9 +591,7 @@ const Address = () => {
                 onClick={() => setOpen(false)}
               />
             </div>
-            <h1 className="text-center text-[25px] font-Poppins">
-              Add New Address
-            </h1>
+            <h1 className="text-center text-2xl font-Poppins">Add New Address</h1>
             <div className="w-full">
               <form aria-required onSubmit={handleSubmit} className="w-full">
                 <div className="w-full block p-4">
@@ -601,7 +599,7 @@ const Address = () => {
                     <label className="block pb-2">Country</label>
                     <input
                       type="text"
-                      className={`${styles.input} !w-[95%] mb-1 800px:mb-0`}
+                      className="w-full mb-1 800px:mb-0"
                       required
                       value={country}
                       onChange={(e) => setCountry(e.target.value)}
@@ -612,18 +610,25 @@ const Address = () => {
                     <label className="block pb-2">Province</label>
                     <input
                       type="text"
-                      className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+                      className="w-full mb-4 800px:mb-0"
                       required
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                     />
                   </div>
 
-                  <div className="w-full pb-2">
+                  <div className="w-full">
+                    <label className="block pb-2 text-red-500 text-base sm:text-xs md:text-sm"> * Restricted delivery coverage area: Calapan City. </label>
+                  </div>
+                  <div className="w-full">
+                    <label className="block pb-2 text-red-500 text-base sm:text-xs md:text-sm"> * For orders outside Calapan City, please contact us via email or our designated channels. </label>
+                  </div>
+
+                  <div class="w-full pb-2">
                     <label className="block pb-2">City / Municipality</label>
                     <input
                       type="address"
-                      className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+                      className={`${styles.input} w-full mb-1 sm:w-[95%] mb-2 sm:mb-0`}
                       required
                       disabled
                       value={address1}
@@ -638,7 +643,7 @@ const Address = () => {
                       id=""
                       value={address2}
                       onChange={(e) => setAddress2(e.target.value)}
-                      className="w-[95%] border h-[40px] rounded-[5px]"
+                      className="w-full border h-[40px] rounded-[5px]"
                     >
                       <option value="" className="block border pb-2">
                         Select Barangay
@@ -660,7 +665,7 @@ const Address = () => {
                     <label className="block pb-2">House # / Street </label>
                     <input
                       type="address"
-                      className={`${styles.input}`}
+                      className={`${styles.input} w-full mb-1 sm:w-[95%] mb-2 sm:mb-0`}
                       required
                       value={address3}
                       onChange={(e) => setAddress3(e.target.value)}
@@ -671,7 +676,7 @@ const Address = () => {
                     <label className="block pb-2">Zip Code</label>
                     <input
                       type="number"
-                      className={`${styles.input}`}
+                      className="w-full"
                       required
                       disabled
                       value={zipCode}
@@ -686,28 +691,22 @@ const Address = () => {
                       id=""
                       value={addressType}
                       onChange={(e) => setAddressType(e.target.value)}
-                      className="w-[95%] border h-[40px] rounded-[5px]"
+                      className="w-full border h-10 rounded-[5px]"
                     >
-                      <option value="" className="block border pb-2">
-                        Choose your Address Type
-                      </option>
+                      <option value="" className="block border pb-2">Choose your Address Type</option>
                       {addressTypeData &&
                         addressTypeData.map((item) => (
-                          <option
-                            className="block pb-2"
-                            key={item.name}
-                            value={item.name}
-                          >
+                          <option className="block pb-2" key={item.name} value={item.name}>
                             {item.name}
                           </option>
                         ))}
                     </select>
                   </div>
 
-                  <div className=" w-full pb-2">
+                  <div className="w-full pb-2">
                     <input
                       type="submit"
-                      className={`${styles.input} mt-5 cursor-pointer`}
+                      className="w-full mt-5 cursor-pointer"
                       required
                       readOnly
                     />
@@ -716,40 +715,34 @@ const Address = () => {
               </form>
             </div>
           </div>
-        </div>
+        </div >
+
       )}
-      <div className="flex w-full items-center justify-between">
-        <h1 className="text-[25px] font-[600] text-[#000000ba] pb-2">
-          My Addresses
-        </h1>
+      <div className="flex flex-col sm:flex-row w-full items-center justify-between">
+        <h1 className="text-xl font-semibold text-[#000000ba] pb-2">My Addresses</h1>
         <div
-          className={`${styles.button} !rounded-md`}
+          className="mt-4 sm:mt-0 sm:ml-4 bg-blue-500 text-white rounded-md px-4 py-2 cursor-pointer"
           onClick={() => setOpen(true)}
         >
-          <span className="text-[#fff]">Add New</span>
+          <span>Add New</span>
         </div>
       </div>
+
       <br />
-      {user &&
+      {
+        user &&
         user.addresses.map((item, index) => (
-          <div
-            className="w-full bg-white h-min 800px:h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10 mb-5"
-            key={index}
-          >
-            <div className="flex items-center">
-              <h5 className="pl-5 font-[600]">{item.addressType}</h5>
+          <div className="w-full bg-white rounded-[4px] shadow mb-5" key={index}>
+            <div className="px-3 py-2">
+              <h5 className="text-base font-semibold">{item.addressType}</h5>
             </div>
-            <div className="pl-8 flex items-center">
-              <h6 className="text-[12px] 800px:text-[unset]">
-                {item.address1} {item.address2} {item.address3}
-              </h6>
+            <div className="px-3 py-2">
+              <h6 className="text-xs">{item.address1} {item.address2} {item.address3}</h6>
             </div>
-            <div className="pl-8 flex items-center">
-              <h6 className="text-[12px] 800px:text-[unset]">
-                {user && user.phoneNumber}
-              </h6>
+            <div className="px-3 py-2">
+              <h6 className="text-xs">{user && user.phoneNumber}</h6>
             </div>
-            <div className="min-w-[10%] flex items-center justify-between pl-8">
+            <div className="px-3 py-2 flex justify-end">
               <AiOutlineDelete
                 size={25}
                 className="cursor-pointer"
@@ -757,14 +750,18 @@ const Address = () => {
               />
             </div>
           </div>
-        ))}
+        ))
+      }
 
-      {user && user.addresses.length === 0 && (
-        <h5 className="text-center pt-8 text-[18px]">
-          You not have any saved address!
-        </h5>
-      )}
-    </div>
+      {
+        user && user.addresses.length === 0 && (
+          <h5 className="text-center pt-8 text-lg sm:text-xl">
+            You do not have any saved addresses!
+          </h5>
+
+        )
+      }
+    </div >
   );
 };
 export default ProfileContent;
