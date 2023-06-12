@@ -81,7 +81,7 @@ const OrderDetails = () => {
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center">
           <BsFillBagFill size={30} color="crimson" />
-          <h1 className="pl-2 text-[25px]">Order Details</h1>
+          <h1 className="pl-2 text-xl md:text-[25px]">Order Details</h1>
         </div>
         <Link to="/dashboard-orders">
           <div
@@ -92,12 +92,12 @@ const OrderDetails = () => {
         </Link>
       </div>
 
-      <div className="w-full flex items-center justify-flex gap-16 pt-6">
-        <h2 className="pt-3 text-[20px] font-[600]">Order Status:</h2>
+      <div className="w-full pt-6">
+        <h2 className="pt-3 text-lg md:text-xl font-semibold">Order Status:</h2>
         {data?.status !== "Processing refund" && data?.status !== "Refund Success" && data?.status !== "Cancel Refund" && (
           <>
             {(data?.status === "Cancelled Order" || data?.status === "Delivered" || data?.status === "Out of Stock") ? (
-              <h2 className="pt-3 text-[20px] font-[600] text-red-500">{data?.status}</h2>
+              <h2 className="pt-3 text-lg md:text-xl font-semibold text-red-500">{data?.status}</h2>
             ) : (
               <select
                 value={status}
@@ -128,29 +128,27 @@ const OrderDetails = () => {
           </>
         )}
 
-        {
-          data?.status === "Processing refund" ? (
-            <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-              className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
-            >
-              {["Processing refund", "Cancel Refund", "Refund Success"].map((option, index) => (
-                <option value={option} key={index}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          ) : (
-            (data?.status === "Refund Success" || data?.status === "Cancel Refund") ? (
-              <h2 className="pt-3 text-[20px] font-[600] text-red-500">{data?.status}</h2>
-            ) : null
-          )
-        }
+        {data?.status === "Processing refund" ? (
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
+          >
+            {["Processing refund", "Cancel Refund", "Refund Success"].map((option, index) => (
+              <option value={option} key={index}>
+                {option}
+              </option>
+            ))}
+          </select>
+        ) : (
+          (data?.status === "Refund Success" || data?.status === "Cancel Refund") ? (
+            <h2 className="pt-3 text-lg md:text-xl font-semibold text-red-500">{data?.status}</h2>
+          ) : null
+        )}
 
         {data?.status !== "Cancelled Order" && data?.status !== "Out of Stock" && data?.status !== "Delivered" && data?.status !== "Cancel Refund" && data?.status !== "Refund Success" && (
           <div
-            className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
+            className={`${styles.button} mt-5 bg-[#FCE1E6] rounded-[4px] text-[#E94560] font-semibold h-10 text-lg md:text-xl`}
             onClick={data?.status !== "Processing refund" ? orderUpdateHandler : refundOrderUpdateHandler}
           >
             Update Status
@@ -158,25 +156,28 @@ const OrderDetails = () => {
         )}
       </div>
 
-      <div className="w-full flex items-center gap-80 pt-6 ">
+
+      <div className="w-full flex flex-col sm:flex-row md:items-center sm:justify-between gap-4 sm:gap-80 pt-6">
         <h5 className="text-black decoration-3">
-          Order ID: <span >#{data?._id?.slice(0, 8)}</span>
+          Order ID: <span className="text-[#000000ba]">#{data?._id?.slice(0, 8)}</span>
         </h5>
-        <h5 className="text-black decoration-3">
+        <h5 className="text-black decoration-3 pt-4 sm:pt-0">
           Order Placed on: <span>{data?.createdAt?.slice(0, 10)}</span> <span>{formatTime(data?.createdAt)}</span>
         </h5>
       </div>
-      <div className="w-full flex items-center justify-between pt-6 ">
-        <h5 className="text-[#0000FF] decoration-3">
+
+      <div className="w-full flex flex-col sm:flex-row md:items-center sm:justify-between md:pt-6">
+        <h5 className="text-[#0000FF] decoration-3 pt-4 sm:pt-0">
           Order Packed on: <span>{data?.packedAt?.slice(0, 10)}</span> <span>{formatTime(data?.packedAt)}</span>
         </h5>
-        <h5 className="text-[#0000FF] decoration-3">
+        <h5 className="text-[#0000FF] decoration-3 pt-4 sm:pt-0">
           Order In Transit on: <span>{data?.InTransitAt?.slice(0, 10)}</span> <span>{formatTime(data?.InTransitAt)}</span>
         </h5>
-        <h5 className="text-[#0000FF] decoration-3" >
+        <h5 className="text-[#0000FF] decoration-3 pt-4 sm:pt-0">
           Order Delivered on: <span>{data?.deliveredAt?.slice(0, 10)}</span> <span>{formatTime(data?.deliveredAt)}</span>
         </h5>
       </div>
+
 
       {/* order items */}
       <br />
@@ -199,10 +200,10 @@ const OrderDetails = () => {
         ))}
 
       <div className="border-t w-full">
-        <h5 className="pt-3 text-[18px] text-right">
+        <h5 className="pt-3 text-[18px] text-left md:text-right">
           Shipping Fee: <strong>₱ 300</strong>
         </h5>
-        <h5 className="pt-3 text-[18px] text-right">
+        <h5 className="pt-3 text-[18px] text-left md:text-right">
           Total Price: <strong>₱ {data?.totalPrice}</strong>
         </h5>
       </div>
@@ -230,73 +231,6 @@ const OrderDetails = () => {
           </h4>
         </div>
       </div>
-      <br />
-      <br />
-      {/* <h4 className="pt-3 text-[20px] font-[600]">Order Status:</h4>
-      {data?.status !== "Processing refund" && data?.status !== "Refund Success" && data?.status !== "Cancel Refund" &&  (
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
-        >
-          {[
-            "Processing",
-            "Packed",
-            "In Transit",
-            "Cancel Order",
-            "Out of Stock",
-            "Delivered",
-          ]
-            .slice(
-              [
-                "Processing",
-                "Packed",
-                "In Transit",
-                "Cancel Order",
-                "Out of Stock",
-                "Delivered",
-              ].indexOf(data?.status)
-            )
-            .map((option, index) => (
-              <option value={option} key={index}>
-                {option}
-              </option>
-            ))}
-        </select>
-      )}
-      {
-        data?.status === "Processing refund" || data?.status === "Refund Success"  || data?.status === "Cancel Refund" ? (
-          <select value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="w-[200px] mt-2 border h-[35px] rounded-[5px]"
-          >
-            {[
-              "Processing refund",
-              "Cancel Refund",
-              "Refund Success",
-            ]
-              .slice(
-                [
-                  "Processing refund",
-                  "Cancel Refund",
-                  "Refund Success",
-                ].indexOf(data?.status)
-              )
-              .map((option, index) => (
-                <option value={option} key={index}>
-                  {option}
-                </option>
-              ))}
-          </select>
-        ) : null
-      }
-
-      <div
-        className={`${styles.button} mt-5 !bg-[#FCE1E6] !rounded-[4px] text-[#E94560] font-[600] !h-[45px] text-[18px]`}
-        onClick={data?.status !== "Processing refund" ? orderUpdateHandler : refundOrderUpdateHandler}
-      >
-        Update Status
-      </div> */}
     </div>
   );
 };
